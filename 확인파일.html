@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>달력과 감정 소비 내역</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+    }
+
+    #calendar-container {
+      width: 400px; /* Adjust this value as needed */
+      height: 400px; /* Adjust this value as needed */
+      margin: 20px auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 15px;
+      text-align: center;
+      vertical-align: top; /* Adjust this value to change the vertical alignment */
+    }
+
+    th {
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    td {
+      cursor: pointer;
+      transition: background-color 0.3s;
+      position: relative; /* 추가된 부분 */
+    }
+
+    td:hover {
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    td.selected {
+      background-color: #2ecc71;
+      color: #fff;
+    }
+
+    .day-number {
+      position: absolute;
+      top: 5px; /* 수정된 부분 */
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .calendar-header {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 20px;
+    }
+
+    .calendar-header button {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .calendar-header button:hover {
+      background-color: #2980b9;
+    }
+
+    /*  감정 소비 내역을 담을 container 스타일 */
+    #expense-container {
+      width: 500px;
+      height: 500px;
+      margin: 20px;
+      background-color: #fff; /* Adjust background color as needed */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* 감정 소비 내역 라벨 스타일 */
+    .label {
+      display: inline-block;
+      width: 100px;
+      height: 30px;
+      line-height: 30px;
+      margin-bottom: 10px;
+    }
+
+    /* 가격 입력 필드 스타일 */
+    .price-input {
+      width: calc(100% - 120px);
+      height: 30px;
+      margin-bottom: 10px;
+    }
+
+    /* 프로그래스 바 스타일 */
+    .progress-bar {
+      height: 10px;
+      background-color: #ddd; /* Adjust background color as needed */
+      margin-top: 20px;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0;
+      background-color: #3498db; /* Adjust progress color as needed */
+    }
+
+    
+  </style>
+</head>
+<body>
+
+  <div id="calendar-container">
+    <div class="calendar-header">
+      <button onclick="prevMonth()">◀</button>
+      <span id="currentMonthYear"></span>
+      <button onclick="nextMonth()">▶</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>日</th>
+          <th>月</th>
+          <th>火</th>
+          <th>水</th>
+          <th>木</th>
+          <th>金</th>
+          <th>土</th>
+        </tr>
+      </thead>
+      <tbody id="calendar-body">
+        <!-- Calendar content goes here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div id="expense-container">
+    <!-- 감정 소비 내역 입력 부분 -->
+    <button class="btn1"><img src = "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg" style="width: 50px; height: 50px; border-radius: 25%;"></button>
+    <input type="number" class="price-input" id="yellowPrice">
+
+    <div class="label">파란동그라미</div>
+    <input type="number" class="price-input" id="bluePrice">
+
+    <div class="label">빨간동그라미</div>
+    <input type="number" class="price-input" id="redPrice">
+
+    <!-- 프로그래스 바 -->
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+  </div>
+
+  <script>
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth() + 1;
+
+    function createCalendar(year, month) {
+      const container = document.getElementById("calendar-body");
+      container.innerHTML = "";
+
+      // Example: Generating a calendar for the specified year and month
+      const firstDay = new Date(year, month - 1, 1).getDay();
+      const lastDay = new Date(year, month, 0).getDate();
+      const totalWeeks = Math.ceil((firstDay + lastDay) / 7);
+
+      let dayCount = 1;
+      for (let i = 0; i < totalWeeks; i++) {
+        const row = container.insertRow();
+
+        for (let j = 0; j < 7; j++) {
+          const cell = row.insertCell();
+
+          if (i === 0 && j < firstDay) {
+            // Empty cells before the first day
+          } else if (dayCount > lastDay) {
+            // Empty cells after the last day
+          } else {
+            const dayNumber = document.createElement("div");
+            dayNumber.textContent = dayCount;
+            dayNumber.classList.add("day-number"); 
+            cell.appendChild(dayNumber);
+            cell.addEventListener("click", () => handleDateClick(dayCount));
+            dayCount++;
+          }
+        }
+      }
+    }
+
+    function updateCalendarHeader() {
+      document.getElementById("currentMonthYear").textContent = `${currentYear}년 ${currentMonth}월`;
+    }
+
+    function prevMonth() {
+      currentMonth--;
+      if (currentMonth === 0) {
+        currentMonth = 12;
+        currentYear--;
+      }
+      updateCalendar();
+    }
+
+    function nextMonth() {
+      currentMonth++;
+      if (currentMonth === 13) {
+        currentMonth = 1;
+        currentYear++;
+      }
+      updateCalendar();
+    }
+
+    function updateCalendar() {
+      updateCalendarHeader();
+      createCalendar(currentYear, currentMonth);
+    }
+
+    // 프로그래스 바
+    function updateProgressBar() {
+      const yellowPrice = parseFloat(document.getElementById("yellowPrice").value) || 0;
+      const bluePrice = parseFloat(document.getElementById("bluePrice").value) || 0;
+      const redPrice = parseFloat(document.getElementById("redPrice").value) || 0;
+
+      const totalExpense = yellowPrice + bluePrice + redPrice;
+      const progressPercentage = (totalExpense / 100) * 100; // Assuming 100 is the maximum budget
+
+      document.getElementById("progress").style.width = progressPercentage + "%";
+    }
+
+    // 이벤트 리스너 추가
+    document.getElementById("yellowPrice").addEventListener("input", updateProgressBar);
+    document.getElementById("bluePrice").addEventListener("input", updateProgressBar);
+    document.getElementById("redPrice").addEventListener("input", updateProgressBar);
+
+    // Initialize the calendar
+    updateCalendar();
+  </script>
+
+</body>
+</html>
