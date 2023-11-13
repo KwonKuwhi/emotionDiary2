@@ -5,98 +5,208 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>onBoarding</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-image: url('./img/background1.jpg');
-            width: 100%;
-            height: 100vh;
-            /* background-size: 100% 100%; */
-            background-size: cover;
-            /* background-repeat: no-repeat; */
-            color: #333;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .popup {
-            width: 500px;
-            height: 600px;
-            background-color: white;
-            border-radius: 20px;
-            /* display:flex; */
-            /* justify-content: center; */
-
-        }
-
-        .logo {
-            /* margin-top: 30px;
-            width: 100px;
-            height: 40px;
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%, 0); */
-            margin-top: 30px;
-            width: 100px;
-            height: 40px;
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
-        }
-
-        .survey {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border-radius: 50px;
-            background-color: #FADEDA;
-            text-align: center;
-            line-height: 30px;
-        }
-
-        .line {
-            display: inline-block;
-            width: 100px;
-            height: 2px;
-            /* border-radius: 50px; */
-            background-color: #FADEDA;
-            /* text-align: center; */
-            line-height: 30px;
-        }
-
-        .survey-num {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 30px;
-            font-weight: 600;
-        }
-        .survey-num1{
-            border:3px solid #FADEDA;
-            background-color: white;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+    <link rel="stylesheet" href="./onboarding.css">
 </head>
 
 <body>
+    <!-- 첫번째 팝업 -->
     <div class="container">
-        <div class="popup">
-            <img class="logo" src="./img/temp_logo.png">
+        <div class="popup" id="popup1">
+            <img class="logo" src="./img/logo.png">
             <div class="survey-num">
-                <div class="survey survey-num1">1</div>
-                <div class="line"></div>
-                <div class="survey survey-num2">2</div>
+                <!-- <div class="survey survey-num1">1</div> -->
+                <div class="line line1"></div>
+                <div class="line line2"></div>
+                <!-- <div class="survey survey-num2">2</div> -->
+            </div>
+
+            <p class="question">감정소비를 한 적이 있나요?</p>
+            <div class="content-wrapper">
+                <input type="button" class="q-box question-num1">
+                <input type="button" class="q-box question-num2">
+            </div>
+            <p class="p-ex">* 감정소비란? 스트레스 해소를 위해 소비하는 것</p>
+            <input type="button" class="submit-btn" value="다음으로" disabled onclick="nextBtn(2)">
+        </div>
+
+
+        <!-- 두번째 팝업-->
+        <div class="popup" id="popup2">
+            <img class="logo" src="./img/logo.png">
+            <div class="survey-num">
+                <!-- <div class="survey survey-num1">1</div> -->
+                <div class="line line1"></div>
+                <div class="line line2"></div>
+                <!-- <div class="survey survey-num2">2</div> -->
+            </div>
+
+            <p class="question">감정소비를 하는 가장 큰 이유는?</p>
+            <div class="content-wrapper">
+                <input type="button" class="q-box q-box2" value="직장 스트레스" onclick="qBox2(1);">
+                <input type="button" class="q-box q-box2" value="인간관계 스트레스" onclick="qBox2(2);">
+                <input type="button" class="q-box q-box2" value="금전 스트레스" onclick="qBox2(3);">
+                <input type="button" class="q-box q-box2" value="가사, 육아 스트레스" onclick="qBox2(4);">
+                <input type="button" class="q-box q-box2" value="취업 스트레스" onclick="qBox2(5);">
+                <input type="button" class="q-box q-box2" value="연애, 결혼 스트레스" onclick="qBox2(6);">
+            </div>
+            <!-- <div class="content-wrapper">
+                <input type="button" class="q-box q-box2 question2-num1" value="직장 스트레스">
+                <input type="button" class="q-box q-box2 question2-num2" value="인간관계 스트레스">
+                <input type="button" class="q-box q-box2 question2-num3" value="금전 스트레스">
+                <input type="button" class="q-box q-box2 question2-num4" value="가사, 육아 스트레스">
+                <input type="button" class="q-box q-box2 question2-num5" value="취업 스트레스">
+                <input type="button" class="q-box q-box2 question2-num6" value="연애, 결혼 스트레스">
+            </div> -->
+            <input type="button" class="submit-btn" value="다음으로" disabled onclick="nextBtn(3)">
+        </div>
+
+        <!-- 세번째 팝업-->
+        <div class="popup" id="popup3">
+            <img class="logo" src="./img/logo.png">
+
+            <!-- <p class="question">세번째</p> -->
+            <div id="hi"></div>
+            <span id="hi2"></span>
+            <h3>다양한 분들이 참여한 설문 결과를 통해 여러 감정소비 경험을 살펴보세요.</h3>
+            <div class="content-wrapper">
+                <div class="graphWrap">
+                    <div class="graph">
+                        <div id="item1" class="p-1">직장 스트레스</div>
+                        <div id="item2" class="p-2">인간관계 스트레스</div>
+                        <div id="item3" class="p-3">금전 스트레스</div>
+                        <div id="item4" class="p-4">가사, 육아 스트레스</div>
+                        <div id="item5" class="p-5">취업 스트레스</div>
+                        <div id="item6" class="p-6">연애, 결혼 스트레스</div>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 
 </body>
+
+<script>
+    const btn = $('.submit-btn');
+    let answer = [];
+    let answer2 = []
+
+    // 다음 버튼을 누르면 버튼 css가 초기화 되도록(disabled 처리)
+    $('.submit-btn').on('click', function () {
+        btn.attr('disabled');
+        btn.removeClass('next');
+        btn.css('background-color', 'rgb(204, 204, 204)')
+        $('.line1').css('background-color', '#c1c1c1');
+        $('.line2').css('background-color', '#FADEDA');
+
+
+    })
+    // .q-box 클릭 이벤트
+    $('.q-box').on('focus', function () {
+        btn.removeAttr('disabled');
+        btn.addClass('next');
+        btn.css('background-color', '#FADEDA')
+        console.log($('.submit-btn').prop('disabled'));
+    })
+
+
+    // 수정한 코드
+    $(document).on('click', function (event) {
+        const clickedElement = $(event.target);
+
+        console.log(clickedElement)
+        // 만약 클릭된 요소가 .q-box가 아니고, submit-btn이 아니면
+        if (!clickedElement.hasClass('q-box') && !clickedElement.hasClass('submit-btn')) {
+            // submit-btn을 disabled 처리하고 스타일 초기화
+            btn.attr('disabled', 'disabled');
+            btn.removeClass('next');
+            btn.css('background-color', 'rgb(204, 204, 204)')
+            console.log($('.submit-btn').prop('disabled'));
+        }
+    });
+
+    // $('.q-box').on('blur', function () {
+    //     // btn.attr('disabled','disabled');
+    //     btn.removeClass('next');
+    //     btn.css('background-color','rgb(204, 204, 204)')
+    //     console.log($('.submit-btn').prop('disabled'));
+    // })
+
+
+
+
+    // .q-box을 마지막으로 클릭한 값을 받아오기 위한 클릭이벤트
+    $('.question-num1').on('click', function () {
+        answer.push('yes');
+        console.log(answer);
+    })
+    $('.question-num2').on('click', function () {
+        answer.push('no');
+        console.log(answer);
+    })
+
+    function qBox2(num) {
+        if (num == 1) {
+            answer2.push(1);
+        } else if (num == 2) {
+            answer2.push(2);
+        } else if (num == 3) {
+            answer2.push(3);
+        } else if (num == 4) {
+            answer2.push(4);
+        } else if (num == 5) {
+            answer2.push(5);
+        } else {
+            answer2.push(6);
+        }
+    }
+
+
+    // 팝업 이벤트
+    function nextBtn(nextPopupNumber) {
+        // 현재 팝업 숨기기
+        $('.popup:visible').css('display', 'none');
+
+        // 다음 팝업 표시
+        const nextPopup = $('#popup' + nextPopupNumber);
+        nextPopup.css('display', 'block');
+
+        // const hi =$('.q-box2:clicked').val();
+
+        if (answer[answer.length - 1] == 'yes') {
+            if (answer2[answer2.length - 1] == '1') {
+                $('#hi').text('직장 스트레스 ')
+            } else if (answer2[answer2.length - 1] == '2') {
+                $('#hi').text('인간관계 스트레스 ')
+            } else if (answer2[answer2.length - 1] == '3') {
+                $('#hi').text('금전 스트레스 ')
+            } else if (answer2[answer2.length - 1] == '4') {
+                $('#hi').text('가사, 육아 스트레스 ')
+            } else if (answer2[answer2.length - 1] == '5') {
+                $('#hi').text('취업 스트레스 ')
+            } else if (answer2[answer2.length - 1] == '6') {
+                $('#hi').text('연애, 결혼 스트레스 ')
+            } else {
+                $('#hi').css('display','none')
+            }
+        } else {
+            $('#hi').text('감정소비 경험이 없으시군요')
+            console.log(answer[answer.length - 1])
+            $('#popup2').css('display', 'none');
+            $('#popup3').css('display', 'block');
+        }
+
+
+
+
+        // $('.popup').addClass('.popup-span');
+        // console.log(answer.length)
+        // console.log(answer[answer.length-1])
+    }
+
+</script>
 
 </html>
