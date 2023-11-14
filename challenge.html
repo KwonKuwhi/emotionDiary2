@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/837ff3adc1.js"       crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <title>emotionDiary</title>
+    <style>
+        @font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+        body {
+            font-family: omyu_pretty;
+            color: #333;
+            font-size: large;
+            text-align: left;
+        }
+        button{
+            background-color: #FADEDA;
+            border-radius: 50%;
+            border: none;
+            padding: 7px;
+            margin: 3px;
+        
+        }
+        input{
+            margin: 5px;
+            padding: 3px;
+            border-radius: 10px;
+            border-color: #3333336c;
+        }
+        table{
+            text-align: center;
+            border: 1px solid #33333367;
+            border-radius: 10px;
+            width: 100%;
+        }
+        #header{
+            line-height: 100px;
+            text-align: left;
+        }
+
+        button:hover{
+            background-color: #f8d0ca;
+        }
+        #container>div {
+            margin: 0 20px;
+            padding: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.26);
+            border-radius: 30px;
+            width: fit-content;
+            height: fit-content;
+            color: #333;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        #container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:flex-start;
+            height: max-content;
+        }
+        section{
+            margin: 0% 15%;
+        }
+        .addbutton {
+            width: 100%;
+            height: fit-content;
+
+
+        }
+        .addbutton > button {
+            margin-bottom: 30px;
+        }
+
+
+        progress{
+            margin-left: 5px;
+        }
+        #tabel{
+            height: 100px;
+            overflow: auto;
+        }
+
+        #delete{
+            background-color: #ffffff00;
+        }
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    #FADEDA
+    #F7BAC2
+    #CACEEB
+    #B7DCE5
+    #F5F5F5
+-->
+
+
+<body>
+    <header>
+
+    </header>
+    <main>
+
+        <div class="addbutton">
+            기간: 오늘
+                ~
+                <input type="date" id="endDay"><br>
+                카테고리: 
+                <select name="category" id="category">
+                    <optgroup>
+                        <option value="travel">여행</option>
+                        <option value="shopping">쇼핑</option>
+                        <option value="culture">문화</option>
+                        <option value="hobby">취미</option>
+                    </optgroup>
+                </select><br>
+                세부계획: <input type="text" id="detail"><br>
+                목표금액: <input type="number" id="goal"><br>
+                <button onclick="addChallenge(this)">추가</button>
+        </div>
+        <h1>진행중인 챌린지</h1>
+        <div id="number">
+            <h3>현재 진행중인 챌린지가 없습니다! <br> 챌린지를 추가해보세요</h3>
+        </div>
+        <section class="challenge current">
+
+            <div id="container">
+
+            </div>
+
+
+
+        </section>
+        <!-- <section class="challenge past">
+            <h3> 지난 챌린지 </h3>
+            <div id="endChallenge"></div>
+
+        </section> -->
+
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script> 
+        let category = "";
+        let i = 0; // 현재 챌린지 개수?
+        // let challengeIs = document.getElementById('number');
+
+        // //버튼 누르면 입력창이 나오는 함수
+        // function creatChallenge(clickedButton) {
+        //     i++;
+        //     let buttonText = clickedButton.textContent || clickedButton.innerText;
+        //     category = buttonText;
+        //     //카테고리 받아옴
+        //     let input = document.createElement('div');
+        //     //새로운 div를 하나 만들기
+        //     input.innerHTML = '기간: 오늘'
+        //         + '~'
+        //         + '<input type="date" id="endDay"><br>'
+        //         + '카테고리: '
+        //         + `${category}<br>`
+        //         + '세부계획: <input type="text" id="detail"><br>'
+        //         + '목표금액: <input type="number" id="goal"><br>'
+        //         + '<button onclick="addChallenge(this)">추가</button>'
+        //         + '<button onclick="remove(this)">취소</button>'
+        //     //div의 내용
+        //     //container의 자식 요소로 추가
+        //     let container = document.getElementById('container');
+        //     container.appendChild(input);
+        // }
+
+        //추가 버튼 누르면 새로운 div에 챌린지 추가
+        function addChallenge(clickedButton) {
+            
+            console.log(i);
+            let date_now = new Date();
+            let Month=date_now.getMonth()+1;
+            let startDay=date_now.getFullYear()
+            +'-'
+            +Month
+            +'-'
+            +date_now.getDate();
+            
+            let endDay = document.getElementById('endDay').value;
+            let detail = document.getElementById('detail').value;
+            let goal = document.getElementById('goal').value;
+            // if(!goal){
+            //     alert('목표 금액을 설정해주세요!');
+            // }
+            let div=document.createElement('div');
+            let parent=document.getElementById('container');
+            let category=document.getElementById('category').value;
+            // let newChallenge = document.createElement('div');
+            switch (category) {
+                case ('travel'):
+                    div.innerHTML = '<i class="bi bi-airplane-fill fs-5"></i><br>'
+                    break;
+                case ('shopping'):
+                    div.innerHTML = '<i class="bi bi-basket-fill fs-5"></i><br>'
+                    break;
+                case ('culture'):
+                    div.innerHTML = '<i class="bi bi-film fs-5"></i><br>'
+                    break;
+                case ('hobby'):
+                    div.innerHTML = '<i class="bi bi-dribbble fs-5"></i><br>'
+                    break;
+            }
+            
+
+
+            div.innerHTML += `기간: ${startDay}~${endDay}<br>`
+                + `카테고리: ${category}<br>`
+                + `세부계획: ${detail}<br>`
+                + `목표금액: ${goal}원<br>`
+                + `<label for="progress"><span>0 </span><span>/ ${goal}</span></label>`
+                + `<progress id="progress" max="${goal}" value="0"></progress><br>`//value 수정
+                + `<button style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button>`
+                + `<div id='inputDiv' style="display: block; height: fit-content;">
+                    <label for="content">내역:</label>
+    <input type="text" id="content" placeholder="내역"><br>
+    <label for="amount">금액:</label>
+    <input type="text" id="amount" placeholder="금액 입력"><br>
+    <button onclick="saveAmount(this)">저장</button>
+`
+                + `<div id="tabel"><table border="1" >
+    <thead>
+        <tr>
+            <th>내역</th>
+            <th>금액</th>
+            <th>날짜</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table></div>`
+
+
+            parent.appendChild(div);
+            i++;
+
+            if (i === 0) {
+                challengeIs.style.display = 'block';
+                console.log(i);
+            }
+            else {
+                challengeIs.innerHTML=`${i}개 챌린지 진행중!`;
+            }
+        }
+        //삭제버튼 누르면 챌린지 삭제
+        function remove(clickedButton) {
+            i--;
+            let removeDiv = clickedButton.parentNode;
+            removeDiv.parentNode.removeChild(removeDiv);
+            if (i === 0) {
+                challengeIs.innerHTML=`<h4>현재 진행중인 챌린지가 없습니다.<br>챌린지를 추가해보세요</h4>`;
+                console.log(i);
+            }
+            else {
+                challengeIs.innerHTML=`${i}개 챌린지 진행중!`;
+            }
+
+        }
+
+        //내역 입력 후 저장 버튼 누르면 테이블에 추가+
+        //progress bar에 반영됨
+        function saveAmount(clickedButton) {
+            let parent = clickedButton.parentNode;
+            let contentLabel = parent.firstElementChild;
+            let content = contentLabel.nextElementSibling.value;
+
+            let amountLabel = parent.querySelector('input:nth-child(5)');
+            let amount = amountLabel.value;
+
+
+
+            // 테이블에 새로운 행 추가
+            let table = parent.querySelector('table');
+            let tableBody = table.querySelector('tbody');
+            let rows = table.rows;
+            console.log(tableBody);
+            let newRow = tableBody.insertRow(tableBody.rows.length);
+
+            let cell1 = newRow.insertCell(0);
+            cell1.innerHTML = content;
+
+            let cell2 = newRow.insertCell(1);
+            cell2.innerHTML = amount;
+            console.log('amount',amount);
+
+            let cell3 = newRow.insertCell(2);
+            date_now=new Date();
+            let Month=date_now.getMonth()+1;
+            let today=date_now.getFullYear()
+            +'-'
+            +Month
+            +'-'
+            +date_now.getDate();
+
+
+            cell3.innerHTML = today;
+
+
+            // 입력 창 초기화
+            amountLabel.value = ""
+            contentLabel.nextElementSibling.value = ""
+
+            //합 구하기
+
+            let numCols = rows[0].cells.length;
+            let colSums = new Array(numCols).fill(0);
+    
+                for (let j = 1; j < rows.length; j++) {
+                    colSums[1] += parseInt(rows[j].cells[1].textContent) || 0;
+                }
+            
+            console.log("총합: ", colSums);
+            let itemDiv = parent.parentNode;
+            let progress = itemDiv.querySelector('progress');
+            let newValue = colSums[1];
+            progress.value = newValue;
+
+            //label값 변경하기
+            let labelProgress = itemDiv.querySelector('span');
+            console.log(itemDiv);
+            console.log(labelProgress);
+            labelProgress.textContent = `${newValue}`
+        }
+
+        //닫기 버튼 누르면 입력창 닫기
+        function closeDiv(clickedButton) {
+            let nowDiv = clickedButton.parentNode;
+            nowDiv.style.display = 'none'
+        }
+
+        //입력하기 버튼 누르면 입력창 뜨기
+        function showInput(clickedButton) {
+            let show1 = clickedButton.nextElementSibling;
+            let show2 = show1.nextElementSibling;
+            console.log(show2);
+            show2.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
