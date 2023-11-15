@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/9c0c1d590d.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
+    <style>
+        /* 완료 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: SUITE;
+        }
+
+        /* 완  */
+        .header {
+            width: 100%;
+            height: 100px;
+            position: fixed;
+            align-items: center;
+            display: flex;
+            border-bottom: 1px solid #d9d9d9;
+            background-color: white;
+            z-index: 100;
+        }
+
+        /* 완 */
+        .header img {
+            height: 40px;
+            margin-left: 50px;
+        }
+
+        /* 완 */
+        .cha-container {
+            display: inline-block;
+        }
+
+        /* 완 */
+        .cha-nav {
+            width: 290px;
+            height: calc(100vh - 100px);
+            background-color: #FFEDED;
+            position: fixed;
+            top: 100px;
+            /* display:flex;
+            align-content: center; */
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .fa-solid {
+            margin-right: 15px;
+        }
+
+        .nav.cha-fedger {
+            margin-top: 30px;
+        }
+
+        .nav {
+            width: 130px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50px;
+            padding: 0 50px;
+            /* border :1px solid black; */
+            margin: 13px auto;
+            color: #333;
+            font-weight: bold;
+            /* transform: translate(10%,-50%); */
+        }
+
+        .nav:hover {
+            background-color: #FF7171;
+            color: white;
+        }
+
+        .cha-content {
+            width: calc(100vw - 307px);
+            height: 100vh;
+            background-color: rgb(115, 44, 44);
+            position: relative;
+            left: 290px;
+            top: 100px;
+        }
+
+        .temp {
+            width: 300px;
+            height: 300px;
+            background-color: aqua;
+        }
+        .tetris{
+            border:1px solid black;
+            width:290px;
+            height:300px;
+            position:fixed;
+            bottom:50px;
+            overflow: hidden;
+        }
+
+        .t-sad{
+            position: absolute;
+            bottom:0;
+            width:60px;
+            animation: sad 10s infinite;
+        }
+        .t-happy{
+            position: absolute;
+            bottom:0;
+            width:60px;
+            animation: happy 10s infinite;
+        }
+        .t-boring{
+            position: absolute;
+            bottom:0;
+            width:60px;
+            animation: boring 10s infinite;
+        }
+        .t-frustrating{
+            position: absolute;
+            bottom:0;
+            width:90px;
+            animation: frustrating 10s infinite;
+        }
+        .t-angry{
+            position: absolute;
+            /* bottom:0; */
+            /* right:140px; */
+            width:60px;
+            animation: angry 20s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        @keyframes angry  {
+            0%{
+                right:140px;
+                top:-50px;
+            }10%{
+                top:100px;
+            }20%{
+                bottom:0px;
+                right:70px;
+            }30%{
+                /* right:70px;
+                bottom:50px; */
+            }40%{
+                /* bottom:0px;
+                right:70px; */
+            }50%{
+
+            }60%{
+
+            }70%{
+
+            }80%{
+
+            }90%{
+
+            }100%{
+                
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header"><img src="./img/logo.png"></div>
+    </header>
+    <div class="cha-container">
+        <div class="cha-nav">
+            <a href="./index.html">
+                <div class="nav cha-fedger"> <i class="fa-solid fa-calendar"></i>감정소비 가계부</div>
+            </a>
+            <a href="./index.html">
+                <div class="nav cha-diary"><i class="fa-solid fa-book"></i>다이어리</div>
+            </a>
+            <a href="./index.html">
+                <div class="nav cha-challenge"><i class="fa-solid fa-square-check"></i>챌린지</div>
+            </a>
+            <div class="tetris">
+                <img class="t-sad" src="./img/sad.png">
+                <img class="t-happy" src="./img/happy.png">
+                <img class="t-boring" src="./img/boring.png">
+                <img class="t-frustrating" src="./img/frustrating.png">
+                <img class="t-angry" src="./img/angry.png">
+            </div>
+        </div>
+        <div class="cha-content">
+            <div class="temp"></div>
+            <div class="temp"></div>
+
+        </div>
+    </div>
+</body>
+
+</html>
