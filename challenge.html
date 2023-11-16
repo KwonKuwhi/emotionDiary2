@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>challenge</title>
     <script src="https://kit.fontawesome.com/9c0c1d590d.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -15,41 +15,47 @@
     <link rel="stylesheet" href="./CSS_challenge.css">
 
     <style>
-        section{
-            
-            margin: auto;
+        section {
+
+            margin: 2% auto 0 auto;
             width: 80%;
         }
-        
-        .title{
-            
-            line-height: 50px;
+
+        .title {
+
+            line-height: 40px;
         }
-        .mainTitle{
+
+        .mainTitle {
             font-size: 32px;
             font-weight: 700;
         }
-        .first{
+
+        .first {
             font-size: 25px;
             font-weight: 700;
         }
-        .second{
+
+        #number {
             font-size: 15px;
             line-height: 17px;
         }
 
-
+        .second {
+            font-size: 15px;
+            line-height: 17px;
+        }
 
         button {
-            background-color: #FADEDA;
-            width: 70px;
+            background-color: #dadada;
+            width: 67px;
             height: 30px;
             line-height: 20px;
-            border-radius: 10%;
-            border:none;
-            
+            border-radius: 4px;
+            border: none;
+
             padding: 7px;
-            margin: 3px;
+            margin: 0px;
         }
 
         input {
@@ -67,7 +73,7 @@
         table {
             text-align: center;
             /* border: 1px solid #33333367; */
-            border:none;
+            border: none;
 
             width: 100%;
         }
@@ -78,8 +84,10 @@
             cursor: pointer;
         }
 
-        
-        
+
+
+
+
 
         /* 첫화면 입력버튼 */
 
@@ -89,11 +97,12 @@
             display: flex;
             height: fit-content;
             /* border: 1px solid black; */
-            box-shadow: 3px 3px 5px 0px rgba(128, 128, 128, 0.37);
+            box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37);
             border-radius: 10px;
-            
+
         }
-        .addbutton table{
+
+        .addbutton table {
             text-align: center;
             width: 100%;
             margin: 0;
@@ -101,23 +110,26 @@
 
         .save {
             margin-bottom: 10px;
-            box-shadow: 1px 1px 5px 0px gray;
+            /* box-shadow: 1px 1px 5px 0px gray; */
         }
-        button:active{
+
+        button:active {
             box-shadow: none
         }
 
-        .addbutton td{
-            
+        .addbutton td {
+
             padding: 20px 0;
             /* border: 1px solid black; */
-            
+
         }
-        .tdInput{
+
+        .tdInput {
             width: 500px;
             text-align: left;
         }
-        .tdContent{
+
+        .tdContent {
             width: 200px;
         }
 
@@ -131,63 +143,90 @@
             height: 31px;
         }
 
-        #startDay , #endDay {
-            width: 37%;
-            height: 28px;
+        #startDay,
+        #endDay {
+            width: 37.5%;
+            height: 30px;
         }
 
         /* 챌린지 요소 */
+        .challenge-current {
+            width: 80%;
+
+        }
+
         #container {
             padding: 25px;
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
+            align-items: flex-start;
             height: max-content;
             margin: auto;
-
+            gap: 15.5px;
+            /* 각 챌린지 요소 사이의 간격 설정 */
         }
 
         #container>div {
-            width: 26%;
-            display: inline-block;
-            padding: 10px;
+            width: calc(33.333% - 15.5px);
+            font-size: 14px;
+            /* 한 줄에 세 개씩, 간격은 gap으로 조절 */
+            box-sizing: border-box;
+            padding: 2%;
             line-height: 33px;
-        
-            border-radius: 30px;
-            box-shadow: 3px 3px 5px 0px rgba(128, 128, 128, 0.37);
-            
-            height: fit-content;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37);
+            height: 400px;
             color: #333;
-            margin-bottom: 30px;
-            margin:0 2%;
+            margin-bottom: 15px;
+            /* 아래쪽 간격 추가 */
         }
 
-        /* #card{
+
+        /* .card{
             border: 1px solid black;
             
         }
-        #card td{
+        .card td{
             border: 1px solid black;
         } */
-        #card .icon{
+        .card button {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .card .icon {
             width: 10%;
-            text-align:left;
             font-size: 25px;
         }
-        #card .detail{
-            width:70%;
+
+        .card .detail {
+            width: 80%;
             text-align: left;
-            font-weight:600 ;
-            font-size:22px
+            font-weight: 600;
+            font-size: 20px
         }
-        #card .xbutton{
-            width:20%;
-            text-align: right;
-            font-size: 25px;
+
+        .card .xbutton {
+            width: 10%;
             
         }
-        #inputDiv > input{
-            height: 17px
+
+        #inputDiv>input {
+            height: 20px;
+            margin:5px 0px;
+        }
+
+        #inputDiv button {
+            width: 36px;
+            height: 24px;
+            font-size: 12px;
+            padding: 0;
+            position: relative;
+            margin-right: 10%;
+            border-radius: 4px;
+
         }
 
 
@@ -196,34 +235,107 @@
         }
 
         #tabel {
-            height: 100px;
+            width: 91%;
+            height:25%;
             overflow: auto;
+            font-size: 12px;
         }
-
-        #deleteChallenge {
+        #tabel th,td {
             border: none;
-            font-size: 25px;
         }
 
-        #deleteTd{
+        .deleteChallenge {
+            border: none;
+            width: auto;
+            font-size: 22px;
+        }
+
+        #deleteTd {
             width: 30px;
             border: none;
             background-color: #33333300;
 
         }
-        progress{
+
+        progress {
             height: 15px;
             width: 95%;
             border-radius: 0;
-            background-color: #d9d9d93b;
+            
+        }
+
+        progress::-webkit-progress-bar {
+            background-color: #e6e6e6;
+        }
+
+        progress::-webkit-progress-value {
+            background-color: #FF7171;
         }
 
 
 
-        th{
+        th {
+            height: fit-content;
+            line-height: 17px;
+            font-size: 14px;
             position: sticky;
             top: 0;
-            background-color: white;
+            background-color: #FADEDA;
+        }
+
+        @media all and (min-width:768px) and (max-width:1200px) {
+
+            /* body {background-color: blue;} */
+            .header img {
+                margin: auto;
+            }
+
+            .cha-nav {
+                display: none;
+            }
+
+            .cha-content {
+                left: 0;
+                width: 100vw;
+            }
+
+            #container>div {
+                width: calc(50% - 15.1px);
+            }
+
+        }
+
+        @media all and (max-width:767px) {
+
+            /* body {background-color: blue;} */
+            .header img {
+                margin: auto;
+            }
+
+            .cha-nav {
+                display: none;
+            }
+
+            .cha-content {
+                left: 0;
+                width: 100vw;
+            }
+
+            #container>div {
+                width: calc(100% - 15.1px);
+            }
+            section{
+                width: 95%;
+            }
+            .challenge-current {
+            width: 95%;
+            
+            
+
+        }
+            #tabel{
+                font-size: 8px;
+            }
         }
     </style>
 
@@ -258,7 +370,8 @@
 
 
 <body>
-    <div class="header"><img src="./img/logo.png"></div>
+    <header>
+        <div class="header"><img src="./img/logo.png"></div>
     </header>
     <div class="cha-container">
         <div class="cha-nav">
@@ -286,8 +399,8 @@
                         <div class="mainTitle">챌린지</div>
                         <div class="second">목표를 달성하세요!</div>
                     </div>
-        
-        
+
+
                     <div class="addbutton">
                         <table align="center">
                             <tr>
@@ -297,7 +410,7 @@
                                 <td class="tdInput">
                                     <input type="date" id="startDay">
                                     ~
-                                    <input type="date" id="endDay" >
+                                    <input type="date" id="endDay">
                                 </td>
                                 <td class="tdContent">
                                     카테고리
@@ -319,54 +432,55 @@
                                     세부계획
                                 </td>
                                 <td class="tdInput">
-                                    <input type="text" id="detail">
+                                    <input type="text" id="detail" placeholder="ex) 애플워치, 유럽여행">
                                 </td>
                                 <td class="tdContent">
                                     목표금액
                                 </td>
                                 <td class="tdInput">
-                                    <input type="number" id="goal"><br>
+                                    <input type="number" id="goal" placeholder="목표금액"><br>
                                 </td>
                             </tr>
-                            <tr >
-                                <td style="text-align: right; padding: 0% 6.5%;" colspan="4"><button class="save" onclick="addChallenge(this)">저장</button></td>
-                                
-        
+                            <tr>
+                                <td style="text-align: right; padding: 0% 6.5%;" colspan="4"><button class="save"
+                                        onclick="addChallenge(this)">저장</button></td>
+
+
                             </tr>
-                            
+
                         </table>
-                        
-        
-        
-                        
-                    </div>
-                </section>
-        
-        
-        
-        
-        
-        
-                <section class="challenge current">
-                    <div class="title">
-                        <div class="first">진행중인 챌린지</div>
-                    <div id="number">
-                        <div class="second">현재 진행중인 챌린지가 없습니다! <br> 챌린지를 추가해보세요</div>
-                    </div>
+
+
+
 
                     </div>
-                    
-        
+                </section>
+
+
+
+
+
+
+                <section class="challenge-current">
+                    <div class="title">
+                        <div class="first">진행중인 챌린지</div>
+                        <div id="number">
+                            <div class="second">현재 진행중인 챌린지가 없습니다! <br> 챌린지를 추가해보세요</div>
+                        </div>
+
+                    </div>
+
+
                     <div id="container">
                         <!-- 챌린지 추가되는 부분 -->
-        
+
                     </div>
-        
+
                 </section>
             </main>
-        
-        
-        
+
+
+
         </div>
     </div>
 
@@ -428,49 +542,17 @@
         document.getElementById('startDay').value = getCurrentDate();
 
 
-
-
-
-
-
-
-
-
-
         let category = "";
         let i = 0; // 현재 챌린지 개수?
         let challengeIs = document.getElementById('number');
 
-        //버튼 누르면 입력창이 나오는 함수
-        function creatChallenge(clickedButton) {
-            i++;
-            let buttonText = clickedButton.textContent || clickedButton.innerText;
-            category = buttonText;
-            //카테고리 받아옴
-            let input = document.createElement('div');
-            //새로운 div를 하나 만들기
-            input.innerHTML = '기간: 오늘'
-                + '~'
-                + '<input type="date" id="endDay"><br>'
-                + '카테고리: '
-                + `${category}<br>`
-                + '세부계획: <input type="text" id="detail"><br>'
-                + '목표금액: <input type="number" id="goal"><br>'
-                + '<button onclick="addChallenge(this)">추가</button>'
-                + '<button onclick="remove(this)">취소</button>'
-            //div의 내용
-            //container의 자식 요소로 추가
-            let container = document.getElementById('container');
-            container.appendChild(input);
-        }
 
-
-
-
+        let n = 0;
         //추가 버튼 누르면 새로운 div에 챌린지 추가
         function addChallenge(clickedButton) {
+            n++;
 
-            console.log(i);
+
             let date_now = new Date();
             let Month = date_now.getMonth() + 1;
             let startDay = date_now.getFullYear()
@@ -481,60 +563,65 @@
 
             let endDay = document.getElementById('endDay').value;
             let detail = document.getElementById('detail').value;
-            if(detail==NaN){
+            if (detail == NaN) {
                 detail = " ";
-                console.log('detil', detail)
+
             }
             let goal = document.getElementById('goal').value;
             // if(!goal){
             //     alert('목표 금액을 설정해주세요!');
             // }
             let div = document.createElement('div');
+            div.id = `${n}th-div`
+
             let parent = document.getElementById('container');
             let category = document.getElementById('category').value;
             // let newChallenge = document.createElement('div');
             switch (category) {
                 case ('travel'):
-                    div.innerHTML = `<table id="card">`
-                        +`<tr><td class="icon"><i class="fa-solid fa-plane"></i></td>`
-                        +`<td class="detail">${detail}</td>`
-                        +`<td class="xbutton"><button id="deleteChallenge" style="text-align:right; background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
-                        +`</tr></table>`
+                    div.innerHTML = `<table class="card">`
+                        + `<tr><td class="icon"><i class="fa-solid fa-plane"></i></td>`
+                        + `<td class="detail">${detail}</td>`
+                        + `<td class="xbutton"><button class="deleteChallenge" style="text-align:right; background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
+                        + `</tr></table>`
                     break;
                 case ('shopping'):
-                    div.innerHTML = `<table id="card">`
-                        +`<tr><td class="icon"><i class="fa-solid fa-plane"></i></td>`
-                        +`<td class="detail">${detail}</td>`
-                        +`<td class="xbutton"><button id="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
-                        +`</tr></table>` 
-                    
+                    div.innerHTML = `<table class="card">`
+                        + `<tr><td class="icon"><i class="fa-solid fa-plane"></i></td>`
+                        + `<td class="detail">${detail}</td>`
+                        + `<td class="xbutton"><button class="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
+                        + `</tr></table>`
+
                     break;
                 case ('culture'):
-                    div.innerHTML = `<table id="card">`
-                        +`<tr><td class="icon"><i class="fa-solid fa-film"></i></td>`
-                        +`<td class="detail">${detail}</td>`
-                        +`<td class="xbutton"><button id="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
-                        +`</tr></table>`
-                    
-                    
+                    div.innerHTML = `<table class="card">`
+                        + `<tr><td class="icon"><i class="fa-solid fa-film"></i></td>`
+                        + `<td class="detail">${detail}</td>`
+                        + `<td class="xbutton"><button class="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
+                        + `</tr></table>`
+
+
                     break;
                 case ('hobby'):
-                    div.innerHTML = `<table id="card">`
-                        +`<tr><td class="icon"><i class="fa-solid fa-basketball"></i></td>`
-                        +`<td class="detail">${detail}</td>`
-                        +`<td class="xbutton"><button id="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
-                        +`</tr></table>`
+                    div.innerHTML = `<table class="card">`
+                        + `<tr><td class="icon"><i class="fa-solid fa-basketball"></i></td>`
+                        + `<td class="detail">${detail}</td>`
+                        + `<td class="xbutton"><button class="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
+                        + `</tr></table>`
                     break;
             }
 
 
 
-            div.innerHTML +=  `기간: ${startDay}~${endDay}<br>`
+            div.innerHTML += `기간: ${startDay}~${endDay}<br>`
                 + `<progress id="progress" max="${goal}" value="0"></progress><br>`
                 + `<label for="progress"><span>0 </span><span>/ ${goal}</span></label>`
-                
+                +'<div>나의 절약기록</div>'
+
                 + `<div id='inputDiv' style="display: block; height: fit-content;">
+                
                     <label for="content">내역:</label>
+                    
     <input type="text" id="content" placeholder="내역"><br>
     <label for="amount">금액:</label>
     <input type="text" id="amount" placeholder="금액 입력"><br>
@@ -543,10 +630,10 @@
                 + `<div id="tabel"><table border="1" class="table2">
     <thead>
         <tr>
-            <th>내역</th>
-            <th>금액</th>
-            <th>날짜</th>
-            <th>삭제</th>
+            <th style="width:35%">내역</th>
+            <th style="width:35%">금액</th>
+            <th style="width:16%">날짜</th>
+            <th style="width:14%">삭제</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -558,35 +645,37 @@
 
             if (i === 0) {
                 challengeIs.style.display = 'block';
-                console.log(i);
+
             }
             else {
                 challengeIs.innerHTML = `${i}개 챌린지 진행중!`;
             }
 
 
-            document.getElementById('goal').value="";
-            document.getElementById('detail').value="";
-            document.getElementById('category').value="travel";
-        
+            document.getElementById('goal').value = "";
+            document.getElementById('detail').value = "";
+            document.getElementById('category').value = "travel";
+            document.getElementById('endDay').value = "";
+
+
         }
         //삭제버튼 누르면 챌린지 삭제
         function remove(clickedButton) {
             i--;
             let td = clickedButton.parentNode;
             let tr = td.parentNode;
-            
+
             let table = tr.parentNode;
             let table1 = table.parentNode
             let removeDiv = table1.parentNode;
 
-            console.log(table);
-            
+
+
 
             removeDiv.parentNode.removeChild(removeDiv);
             if (i === 0) {
                 challengeIs.innerHTML = `<div>현재 진행중인 챌린지가 없습니다.<br>챌린지를 추가해보세요</div>`;
-                console.log(i);
+
             }
             else {
                 challengeIs.innerHTML = `<div>${i}개 챌린지 진행중!</div>`;
@@ -599,12 +688,12 @@
         function saveAmount(clickedButton) {
             let parent1 = clickedButton.parentNode;
             let parent = parent1.parentNode;
-            
+
             let contentLabel = parent.firstElementChild;
             let content = contentLabel.nextElementSibling.value;
 
             let amountLabel = parent.querySelector('input:nth-child(5)');
-            console.log(amountLabel);
+
             let amount = amountLabel.value;
 
 
@@ -612,10 +701,10 @@
             // 테이블에 새로운 행 추가
             let parentDiv = parent.parentNode;
             let table = parentDiv.querySelector('.table2');
-            console.log('확인',table);
+
             let tableBody = table.querySelector('tbody');
             let rows = table.rows;
-            
+
             let newRow = tableBody.insertRow(tableBody.rows.length);
 
             let cell1 = newRow.insertCell(0);
@@ -623,20 +712,18 @@
 
             let cell2 = newRow.insertCell(1);
             cell2.innerHTML = amount;
-            console.log('amount', amount);
 
             let cell3 = newRow.insertCell(2);
             date_now = new Date();
             let Month = date_now.getMonth() + 1;
-            let today = date_now.getFullYear()
-                + '-'
-                + Month
+            let today = 
+                Month
                 + '-'
                 + date_now.getDate();
 
 
             cell3.innerHTML = today;
-            
+
             let cell4 = newRow.insertCell(3);
             cell4.innerHTML = `<button id="deleteTd" onclick="removeTr(this)"><i class="fa-solid fa-xmark"></i></button>`
 
@@ -654,7 +741,7 @@
                 colSums[1] += parseInt(rows[j].cells[1].textContent) || 0;
             }
 
-            console.log("총합: ", colSums);
+
             let itemDiv = parent.parentNode;
             let progress = itemDiv.querySelector('progress');
             let newValue = colSums[1];
@@ -662,30 +749,36 @@
 
             //label값 변경하기
             let labelProgress = itemDiv.querySelector('span');
-            console.log(itemDiv);
-            console.log(labelProgress);
             labelProgress.textContent = `${newValue}`
         }
 
-        //닫기 버튼 누르면 입력창 닫기
-        function closeDiv(clickedButton) {
-            let nowDiv = clickedButton.parentNode;
-            nowDiv.style.display = 'none'
-        }
 
-        //입력하기 버튼 누르면 입력창 뜨기
-        function showInput(clickedButton) {
-            let show1 = clickedButton.nextElementSibling;
-            let show2 = show1.nextElementSibling;
-            console.log(show2);
-            show2.style.display = 'block';
-        }
+        function removeTr(clickedButton) {
+            let td = clickedButton.parentNode;
 
-        function removeTr(clickedButton){
-                let tr = clickedButton.parentNode;
-                console.log(tr);
-                tr.parentNode.remove(tr);
-            }
+
+
+            tr = td.parentNode;
+            subTd = tr.querySelector("td:nth-child(2)");
+            sub = Number(subTd.innerHTML)
+
+
+
+            tbody = tr.parentNode;
+            table = tbody.parentNode;
+            tableDiv = table.parentNode;
+            itemDiv = tableDiv.parentNode;
+
+            progress = itemDiv.querySelector('progress');
+            progress.value -= sub;
+
+            label = itemDiv.querySelector('span');
+            label.innerHTML = progress.value;
+
+
+
+            td.parentNode.remove(td);
+        }
     </script>
 </body>
 
