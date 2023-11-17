@@ -613,6 +613,7 @@ a {
     POSITION: absolute;
     right: 60px;
     font-size: 35px;
+    color:#8e5252;
 }
 .nav-logoutBtn{
     display: none;
@@ -772,7 +773,7 @@ a {
 }
 
 .nav-expanded {
-    height: 30%;
+    height: fit-content;
     transition: height 1s;
     z-index: 100;
     padding-top: 3%;
@@ -945,7 +946,7 @@ a {
 }
 
 .nav-expanded {
-    height: 23%;
+    height: fit-content;
     transition: height 1s;
     z-index: 100;
     padding-top: 4%;
