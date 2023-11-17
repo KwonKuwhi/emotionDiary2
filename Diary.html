@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>차곡차곡</title>
     <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script
       src="https://kit.fontawesome.com/9c0c1d590d.js"
       crossorigin="anonymous"
     ></script>
@@ -12,130 +17,105 @@
       href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css"
       rel="stylesheet"
     />
+    <link href="./index.css" rel="stylesheet" />
+    <link rel="icon" href="./img/face.png" type="image/x-icon" />
+    <script src="./index.js"></script>
 
     <link rel="stylesheet" href="./diary_CSS.css" />
 
-    <style>
-      /* PC */
-      @media all and (min-width: 1024px) {
-        /* body {
-          background-color: red;
-        } */
-      }
-
-      /* 태블릿 */
-      @media all and (min-width: 768px) and (max-width: 1023px) {
-        /* body {background-color: blue;} */
-        .header img {
-          margin: auto;
-        }
-        .cha-nav {
-          display: none;
-        }
-
-        .cha-content {
-          left: 0;
-          width: 100vw;
-        }
-      }
-
-      /* 모바일 */
-      @media all and (max-width: 767px) {
-        /* body {background-color: tomato;} */
-        .header img {
-          margin: auto;
-        }
-        .cha-nav {
-          display: none;
-        }
-
-        .cha-content {
-          left: 0;
-          width: 100vw;
-        }
-
-        #main {
-        }
-
-        .container {
-        }
-
-        .month {
-        }
-
-        .save {
-          margin-left: 87%;
-        }
-
-        .content {
-        }
-      }
-    </style>
+    <style></style>
   </head>
 
   <body>
-    <div class="header"><img src="./IMG/logo.png" /></div>
+    <div class="header">
+      <img src="./img/logo.png" onclick="location.href='./main.html'" />
+      <div class="loginBtn" onclick="location.href='./login.html'">
+        <i class="fa-solid fa-user"></i> 로그인
+      </div>
+      <i class="fa-solid fa-bars"></i>
+      <div class="user-profile">
+        <div class="user-name">환영합니다<br /></div>
+        <img id="profile" src="./img/face.png" />
+      </div>
+      <div class="user-name-span">
+        <div class="logoutBtn" onclick="logout();">로그아웃</div>
+      </div>
+      <!-- <div class="logoutBtn" onclick="logout();"><i class="fa-solid fa-arrow-right-from-bracket"></i></i> 로그아웃</div> -->
+    </div>
 
     <div class="cha-container">
       <div class="cha-nav">
-        <a href="./index.html">
-          <div class="nav cha-fedger">
-            <i class="fa-solid fa-calendar"></i>감정소비 가계부
-          </div>
-        </a>
-        <a href="./index.html">
-          <div class="nav cha-diary">
-            <i class="fa-solid fa-book"></i>다이어리
-          </div>
-        </a>
-        <a href="./index.html">
-          <div class="nav cha-challenge">
-            <i class="fa-solid fa-square-check"></i>챌린지
-          </div>
-        </a>
+        <div class="nav-loginBtn" onclick="location.href='./login.html'">
+          로그인
+        </div>
+        <div class="nav-user-profile">
+          <div class="nav-user-name">환영합니다<br /></div>
+          <img id="profile" src="./img/face.png" />
+        </div>
+        <div class="nav-user-name-span">
+          <div class="nav-logoutBtn" onclick="logout();">로그아웃</div>
+        </div>
+        <!-- <div class="nav-user-name-span">
+                <div onclick="logout();">로그아웃</div>
+            </div> -->
+        <ul class="nav-menu">
+          <a href="./index.html">
+            <li class="nav-li">
+              <i class="fa-solid fa-calendar"></i>감정소비 가계부
+            </li>
+          </a>
+          <a href="./index.html">
+            <li class="nav-li"><i class="fa-solid fa-book"></i>다이어리</li>
+          </a>
+          <a href="./index.html">
+            <li class="nav-li">
+              <i class="fa-solid fa-square-check"></i>챌린지
+            </li>
+          </a>
+        </ul>
+
         <div class="tetris">
-          <img class="t-sad" src="./IMG/sad.png" />
-          <img class="t-happy" src="./IMG/happy.png" />
-          <img class="t-boring" src="./IMG/boring.png" />
-          <img class="t-frustrating" src="./IMG/frustrating.png" />
-          <img class="t-angry" src="./IMG/angry.png" />
+          <img class="t-sad" src="./img/sad.png" />
+          <img class="t-happy" src="./img/happy.png" />
+          <img class="t-boring" src="./img/boring.png" />
+          <img class="t-frustrating" src="./img/frustrating.png" />
+          <img class="t-angry" src="./img/angry.png" />
         </div>
       </div>
-    </div>
+      <div class="cha-content">
+        <!-- 다이어리 전체   -->
 
-    <div class="cha-content">
-      <!-- 다이어리 전체   -->
-
-      <div id="main">
-        <div class="diaryHeader">
-          <div class="diarytTitle">다이어리</div>
-          <div class="diaryExplain">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo enim
-            molestiae qui fugiat nemo dignissimos placeat reiciendis. Numquam
-            accusantium, illum ipsum totam voluptas, et cupiditate veniam sit
-            distinctio ipsa obcaecati?
+        <div id="main">
+          <div class="diaryHeader">
+            <div class="diarytTitle">다이어리</div>
+            <div class="diaryExplain">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo enim
+              molestiae qui fugiat nemo dignissimos placeat reiciendis. Numquam
+              accusantium, illum ipsum totam voluptas, et cupiditate veniam sit
+              distinctio ipsa obcaecati?
+            </div>
           </div>
-        </div>
 
-        <!-- 날짜 변경 버튼 -->
-        <div class="month">
-          <button class="btn beforeWeek">◀︎</button>
-          <!-- &#9194; -->
-          <!-- onclick="beforeWeek()" -->
-          <div id="yearMonth"></div>
-          <button class="btn afterWeek">►</button>
-          <!-- onclick="afterWeek()" -->
-          <!-- &#9193; -->
-        </div>
+          <!-- 날짜 변경 버튼 -->
+          <div class="month">
+            <button class="btn beforeWeek">◀︎</button>
+            <!-- &#9194; -->
+            <!-- onclick="beforeWeek()" -->
+            <div id="yearMonth"></div>
+            <button class="btn afterWeek">►</button>
+            <!-- onclick="afterWeek()" -->
+            <!-- &#9193; -->
+          </div>
 
-        <!-- 추가 및 저장 버튼 -->
-        <div class="saveButton">
-          <button onclick="save()" type="button" class="save">저장</button>
-        </div>
-        <!-- 다이어리 -->
+          <!-- 추가 및 저장 버튼 -->
+          <div class="saveButton">
+            <button onclick="save()" type="button" class="save">저장</button>
+          </div>
+          <!-- 다이어리 -->
 
-        <div class="container">
-          <!-- 아코디언 만들기 -->
+          <div class="container">
+            <!-- 아코디언 만들기 -->
+          </div>
         </div>
       </div>
     </div>
@@ -262,7 +242,7 @@
         }
 
         // 다이어리 업데이트
-        updateDiaryEntries();
+        // updateDiaryEntries();
 
         // 이전주 이동 함수
         function beforeWeek() {
@@ -313,9 +293,8 @@
         const contElements = document.querySelectorAll(".content");
 
         for (let i = 0; i < collElements.length; i++) {
-          let saveDate = collElements[i]
-            .getAttribute("data-date")
-            .replace(/\s/g, "");
+          let saveDate = collElements[i].getAttribute("data-date");
+          // .replace(/\s/g, "");
           let saveContent = contElements[i].value;
 
           let data = { 날짜: saveDate, 내용: saveContent };
