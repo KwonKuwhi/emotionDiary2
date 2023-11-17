@@ -95,17 +95,22 @@
             margin: 20px 20px;
             padding: auto;
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             height: fit-content;
-            /* border: 1px solid black; */
-            box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37);
+            /* border: 1px solid rgb(184, 184, 184); */
+            /* box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37); */
             border-radius: 10px;
 
+        }
+        #addbutton{
+            box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37);
         }
 
         .addbutton table {
             text-align: center;
             width: 100%;
-            margin: 0;
+            margin-bottom: 10px;
         }
 
         .save {
@@ -210,12 +215,12 @@
 
         .card .xbutton {
             width: 10%;
-            
+
         }
 
         #inputDiv>input {
             height: 20px;
-            margin:5px 0px;
+            margin: 5px 0px;
         }
 
         #inputDiv button {
@@ -236,11 +241,13 @@
 
         #tabel {
             width: 91%;
-            height:25%;
+            height: 25%;
             overflow: auto;
             font-size: 12px;
         }
-        #tabel th,td {
+
+        #tabel th,
+        td {
             border: none;
         }
 
@@ -261,7 +268,7 @@
             height: 15px;
             width: 95%;
             border-radius: 0;
-            
+
         }
 
         progress::-webkit-progress-bar {
@@ -324,18 +331,50 @@
             #container>div {
                 width: calc(100% - 15.1px);
             }
-            section{
+
+            section {
                 width: 95%;
             }
-            .challenge-current {
-            width: 95%;
-            
-            
 
-        }
-            #tabel{
-                font-size: 8px;
+            .challenge-current {
+                width: 95%;
+
+
+
             }
+
+            #tabel {
+                font-size: 10px;
+            }
+
+            #addbutton tr {
+                display: block;
+                box-sizing: border-box;
+            }
+
+            #addbutton td {
+                display: block;
+                box-sizing: border-box;
+            }
+
+            .addbutton td {
+
+                padding: 10px 0;
+                /* border: 1px solid black; */
+
+            }
+
+            .tdContent {
+                width: 100%;
+
+            }
+
+            .tdInput {
+                width: 100%;
+                text-align: center;
+            }
+
+
         }
     </style>
 
@@ -402,7 +441,7 @@
 
 
                     <div class="addbutton">
-                        <table align="center">
+                        <table align="center" id="addbutton">
                             <tr>
                                 <td class="tdContent">
                                     도전기간
@@ -441,14 +480,16 @@
                                     <input type="number" id="goal" placeholder="목표금액"><br>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="text-align: right; padding: 0% 6.5%;" colspan="4"><button class="save"
-                                        onclick="addChallenge(this)">저장</button></td>
+                            <!-- <tr>
+                                <td style="text-align: center; padding: 0% 6.5%;" colspan="4"></td>
 
 
-                            </tr>
+                            </tr> -->
 
                         </table>
+                        <br>
+                        <button class="save"
+                                        onclick="addChallenge(this)">저장</button>
 
 
 
@@ -524,7 +565,34 @@
 
 
     <script>
-        // 현재 날짜를 가져오는 함수
+        let n=0;
+//로컬 스토리지에서 데이터 불러오기
+        document.addEventListener('DOMContentLoaded',function(){
+            
+            for(let i=0;i<localStorage.length;i++){
+                const key = localStorage.key(i);
+                if(key.startsWith('challenge_')){
+                    const data=JSON.parse(localStorage.getItem(key));
+                    addChallengeWithData(data);
+                }
+            }
+        });
+
+
+//저장된 데이터로 챌린지 추가하기
+        function addChallengeWithData(data){
+            n=data.n;
+            startDay=data.startDay;
+            endDay = data.endDay;
+            detail = data.detail;
+            goal = data.goal;
+            category = data.category;
+            addchallengeDiv(n,startDay,endDay,detail,goal,category);
+        }
+
+
+
+// 현재 날짜를 가져오는 함수
         function getCurrentDate() {
             const today = new Date();
             const year = today.getFullYear();
@@ -538,6 +606,8 @@
             return `${year}-${month}-${day}`;
         }
 
+
+
         // date input에 오늘 날짜를 설정
         document.getElementById('startDay').value = getCurrentDate();
 
@@ -547,8 +617,9 @@
         let challengeIs = document.getElementById('number');
 
 
-        let n = 0;
-        //추가 버튼 누르면 새로운 div에 챌린지 추가
+
+        
+//추가 버튼 누르면 새로운 div에 챌린지 추가
         function addChallenge(clickedButton) {
             n++;
 
@@ -568,16 +639,35 @@
 
             }
             let goal = document.getElementById('goal').value;
-            // if(!goal){
-            //     alert('목표 금액을 설정해주세요!');
-            // }
-            let div = document.createElement('div');
-            div.id = `${n}th-div`
-
-            let parent = document.getElementById('container');
             let category = document.getElementById('category').value;
-            // let newChallenge = document.createElement('div');
-            switch (category) {
+
+            addchallengeDiv(n,startDay,endDay,detail,goal,category);
+            saveToLocalStorage(n,startDay,endDay,detail,goal,category); //로컬 스토리지에 데이터 저장
+        }
+//로컬 스토리지에 데이터 저장하는 함수
+        function saveToLocalStorage(n,startDay,endDay,detail,goal,category){
+            const data = {
+                n:n,
+                startDay:startDay,
+                endDay:endDay,
+                detail:detail,
+                goal:goal,
+                category:category
+            };
+            //로컬 스토리지에 데이터를 저장
+            const key = `challenge_${n}`;
+            localStorage.setItem(key, JSON.stringify(data));
+        }        
+
+//추가 함수
+        function addchallengeDiv(n,startDay,endDay,detail,goal,category){
+        let div = document.createElement('div');
+        let parent = document.getElementById('container');
+            div.id = `${n}`;
+            div.classList.add('challenge_');
+
+        switch (category) {
+                
                 case ('travel'):
                     div.innerHTML = `<table class="card">`
                         + `<tr><td class="icon"><i class="fa-solid fa-plane"></i></td>`
@@ -616,7 +706,7 @@
             div.innerHTML += `기간: ${startDay}~${endDay}<br>`
                 + `<progress id="progress" max="${goal}" value="0"></progress><br>`
                 + `<label for="progress"><span>0 </span><span>/ ${goal}</span></label>`
-                +'<div>나의 절약기록</div>'
+                + '<div>나의 절약기록</div>'
 
                 + `<div id='inputDiv' style="display: block; height: fit-content;">
                 
@@ -631,9 +721,9 @@
     <thead>
         <tr>
             <th style="width:35%">내역</th>
-            <th style="width:35%">금액</th>
-            <th style="width:16%">날짜</th>
-            <th style="width:14%">삭제</th>
+            <th style="width:30%">금액</th>
+            <th style="width:20%">날짜</th>
+            <th style="width:15%">삭제</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -659,9 +749,18 @@
 
 
         }
-        //삭제버튼 누르면 챌린지 삭제
+        
+//삭제버튼 누르면 챌린지 삭제
         function remove(clickedButton) {
+            let challengeDiv = findAncestor(clickedButton, 'challenge_');
+            let challengeId = challengeDiv.id;
+
+    // 로컬 스토리지에서 해당 ID에 해당하는 데이터 삭제
+    removeChallengeFromLocalStorage(challengeId);
+
             i--;
+
+
             let td = clickedButton.parentNode;
             let tr = td.parentNode;
 
@@ -680,11 +779,17 @@
             else {
                 challengeIs.innerHTML = `<div>${i}개 챌린지 진행중!</div>`;
             }
-
         }
-
-        //내역 입력 후 저장 버튼 누르면 테이블에 추가+
-        //progress bar에 반영됨
+        function findAncestor(el, className){
+            while ((el = el.parentElement) && !el.classList.contains(className));
+    return el;
+        }
+        function removeChallengeFromLocalStorage(challengeId) {
+    const key = `challenge_${challengeId}`;
+    localStorage.removeItem(key);
+}
+//내역 입력 후 저장 버튼 누르면 테이블에 추가+
+//progress bar에 반영됨
         function saveAmount(clickedButton) {
             let parent1 = clickedButton.parentNode;
             let parent = parent1.parentNode;
@@ -716,7 +821,7 @@
             let cell3 = newRow.insertCell(2);
             date_now = new Date();
             let Month = date_now.getMonth() + 1;
-            let today = 
+            let today =
                 Month
                 + '-'
                 + date_now.getDate();
@@ -752,7 +857,7 @@
             labelProgress.textContent = `${newValue}`
         }
 
-
+//함수- 내역 삭제제
         function removeTr(clickedButton) {
             let td = clickedButton.parentNode;
 
