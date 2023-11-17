@@ -13,27 +13,10 @@ $(window).ready(function () {
         checkLoggedIn();
     });
 
-    $(".fa-bars").click(function () {
+    $(".menuBtn").click(function () {
     $(".cha-nav").toggleClass("nav-expanded");
 });
 })
-// 로그인 유저인지 확인하는 함수
-// const checkLoggedIn = () => {
-//     // localStorage.getItem('키') : 해당 키값을 가지고 있는 데이터가 로컬 스토리지에 있는지 확인, 값을 가져옴
-//     console.log(localStorage.getItem('loggedIn'))
-//     console.log(localStorage.getItem('userName'))
-
-//     // 사용자가 로그인 했을 때 사용자의 프로필이 보이게
-//     if (localStorage.getItem('loggedIn') == 'true') {
-//         $('.loginBtn').css('display', 'none');
-//         $('.user-profile').css('display', 'block');
-//     } else {
-//         $('.loginBtn').css('display', 'block');
-//         $('.user-profile').css('display', 'none');
-
-//     }
-// }
-
 
 
 const checkLoggedIn =() =>{
@@ -121,18 +104,3 @@ function navToggleBtn() {
     }
     console.log(btn);
 }
-
-// 화면 크기에 따라 처리하는 함수
-// const checkScreenWidth = () => {
-//     if (window.innerWidth >= 768 && window.innerWidth <= 1023) {
-//         // 미디어 쿼리 범위에 해당하는 경우
-//         $('.loginBtn').css('display', 'none'); // 미디어 쿼리와 같은 스타일 적용
-//     } else if (window.innerWidth <= 767) {
-//         $('.loginBtn').css('display', 'none'); // 미디어 쿼리와 같은 스타일 적용
-//     } else {
-//         // 미디어 쿼리 범위에 해당하지 않는 경우
-//         $('.cha-nav').css('display', 'block'); // 원래 스타일로 변경
-//         $('.loginBtn').css('display', 'block'); // 원래 스타일로 변경
-//     }
-// }
-
