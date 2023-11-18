@@ -1,6 +1,7 @@
 section {
     margin: 2% auto 0 auto;
     width: 80%;
+    
 }
 
 .title {
@@ -77,8 +78,6 @@ button:active {
     flex-wrap: wrap;
     justify-content: flex-end;
     height: fit-content;
-    /* border: 1px solid rgb(184, 184, 184); */
-    /* box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37); */
     border-radius: 10px;
 
 }
@@ -275,90 +274,4 @@ th {
     position: sticky;
     top: 0;
     background-color: #FADEDA;
-}
-
-@media all and (min-width:768px) and (max-width:1023px) {
-
-    /* body {background-color: blue;} */
-    .header img {
-        margin: auto;
-    }
-
-    .cha-nav {
-        display: none;
-    }
-
-    .cha-content {
-        left: 0;
-        width: 100vw;
-    }
-
-    #container>div {
-        width: calc(50% - 15.1px);
-    }
-
-}
-
-@media all and (max-width:767px) {
-    body {
-        text-align: center;
-    }
-
-    /* body {background-color: blue;} */
-    .header img {
-        margin: auto;
-    }
-
-    .cha-nav {
-        display: none;
-    }
-
-    .cha-content {
-        left: 0;
-        width: 100vw;
-    }
-
-    #container>div {
-        width: calc(100% - 15.1px);
-    }
-
-    section {
-        width: 95%;
-    }
-
-    .challenge-current {
-        width: 95%;
-    }
-
-    #tabel {
-        font-size: 10px;
-    }
-
-    #addbutton tr {
-        display: block;
-        box-sizing: border-box;
-    }
-
-    #addbutton td {
-        display: block;
-        box-sizing: border-box;
-    }
-
-    .addbutton td {
-        padding: 10px 0;
-        /* border: 1px solid black; */
-    }
-
-    .tdContent {
-        width: 100%;
-    }
-
-    .tdInput {
-        width: 100%;
-        text-align: center;
-    }
-    .addbutton{
-        justify-content: center;
-    }
-
 }
