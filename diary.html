@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>차곡차곡</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" href="./img/face.png" type="image/x-icon" />
+
+    <!-- 3개 링크 연결 -->
+    <script src="./index.js"></script>
+    <link href="./index.css" rel="stylesheet" />
+    <link href="./diary.css" rel="stylesheet" />
+
+    <style></style>
+  </head>
+
+  <body>
+    <div class="header">
+      <img src="./img/logo.png" onclick="location.href='./main.html'" />
+      <div class="loginBtn" onclick="location.href='./login.html'">로그인</div>
+      <!-- <i class="fa-solid fa-bars"></i> -->
+      <img src="./img/menu.svg" class="menuBtn" />
+
+      <div class="user-profile">
+        <div class="user-name">환영합니다<br /></div>
+        <img id="profile" src="./img/face.png" />
+      </div>
+      <div class="user-name-span">
+        <div class="logoutBtn" onclick="logout();">로그아웃</div>
+      </div>
+    </div>
+
+    <div class="cha-container">
+      <div class="cha-nav">
+        <div class="nav-loginBtn" onclick="location.href='./login.html'">
+          로그인
+        </div>
+        <div class="nav-user-profile">
+          <div class="nav-user-name">환영합니다<br /></div>
+          <img id="profile" src="./img/face.png" />
+        </div>
+        <div class="nav-user-name-span">
+          <div class="nav-logoutBtn" onclick="logout();">로그아웃</div>
+        </div>
+        <!-- <div class="nav-user-name-span">
+                <div onclick="logout();">로그아웃</div>
+            </div> -->
+        <ul class="nav-menu">
+          <a href="./index.html">
+            <li class="navi-li">
+              <img src="./img/fedger.svg" class="li-img" />감정소비 가계부
+            </li>
+          </a>
+          <a href="./index.html">
+            <li class="navi-li">
+              <img src="./img/diary.svg" class="li-img" />다이어리
+            </li>
+          </a>
+          <a href="./index.html">
+            <li class="navi-li">
+              <img src="./img/challenge.svg" class="li-img" />챌린지
+            </li>
+          </a>
+        </ul>
+
+        <div class="tetris">
+          <img class="t-sad" src="./img/sad.png" />
+          <img class="t-happy" src="./img/happy.png" />
+          <img class="t-boring" src="./img/boring.png" />
+          <img class="t-frustrating" src="./img/frustrating.png" />
+          <img class="t-angry" src="./img/angry.png" />
+        </div>
+      </div>
+
+      <div class="cha-content">
+        <!-- 다이어리 전체   -->
+
+        <div id="main">
+          <div class="diaryHeader">
+            <div class="diarytTitle">다이어리</div>
+            <div class="diaryExplain">그날 그날의 감정을 기록하는 다이어리</div>
+          </div>
+
+          <!-- 날짜 변경 버튼 -->
+          <div class="month">
+            <button class="btn beforeWeek">◀︎</button>
+            <!-- &#9194; -->
+            <!-- onclick="beforeWeek()" -->
+            <div id="yearMonth"></div>
+            <button class="btn afterWeek">►</button>
+            <!-- onclick="afterWeek()" -->
+            <!-- &#9193; -->
+          </div>
+
+          <!-- 추가 및 저장 버튼 -->
+          <div class="saveButton">
+            <button onclick="save()" type="button" class="save">저장</button>
+          </div>
+          <!-- 다이어리 -->
+
+          <div class="container">
+            <!-- 아코디언 만들기 -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 저장된 값 호출
+        loadDiaryEntries();
+
+        // 컨테이너
+        const diaryContainer = document.querySelector(".container");
+
+        // yearMonth
+        const yearMonthElement = document.getElementById("yearMonth");
+
+        // 현재 날짜 가져오기
+        const currentDate = new Date();
+
+        // 다이어리 업데이트
+        function updateDiaryEntries() {
+          // 이전 값 삭제
+          diaryContainer.innerHTML = "";
+
+          // 현재 주의 시작일 (일요일) 가져오기
+          const startDate = new Date(currentDate);
+          startDate.setDate(currentDate.getDate() - currentDate.getDay());
+
+          // 주차 정보 업데이트
+          const startOfMonth = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            1
+          );
+          const weekNumber = Math.ceil(
+            (currentDate - startOfMonth) / (7 * 24 * 60 * 60 * 1000)
+          );
+
+          // yearMonth 업데이트
+          yearMonthElement.textContent = `${currentDate.getFullYear()}년 ${
+            currentDate.getMonth() + 1
+          }월 ${weekNumber}주차`;
+
+          // 가장 마지막 날이 위로
+          // for (let i = 6; i >= 0; i--)
+
+          // 첫 날이 위로
+          for (let i = 0; i <= 6; i++) {
+            const getDate = new Date(startDate);
+            getDate.setDate(startDate.getDate() + i);
+
+            const entryElement = document.createElement("div");
+            entryElement.classList.add("arco");
+
+            const collapsibleButton = document.createElement("button");
+            collapsibleButton.type = "button";
+            collapsibleButton.classList.add("collapsible");
+
+            console.log(getDate.getMonth() + 1);
+
+            // 요일
+            function getDayOfWeek(dayIndex) {
+              const daysOfWeek = [
+                "Sun",
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat",
+              ];
+              return daysOfWeek[dayIndex];
+            }
+
+            // 추가
+            let dateTextForStorage = `${
+              getDate.getMonth() + 1
+            }월 ${getDate.getDate()}일 (${getDayOfWeek(getDate.getDay())})`;
+
+            collapsibleButton.setAttribute("data-date", dateTextForStorage);
+            collapsibleButton.innerHTML = `<span>${dateTextForStorage}</span>`;
+
+            // 텍스트 넣기
+            // collapsibleButton.textContent = ` ${
+            //   getDate.getMonth() + 1
+            // }월 ${getDate.getDate()}일 (${getDayOfWeek(getDate.getDay())}) `;
+
+            collapsibleButton.addEventListener("click", function () {
+              this.classList.toggle("active");
+              let content = this.nextElementSibling;
+
+              let savedContent = getItem(getDate);
+
+              if (content.style.display === "block") {
+                content.style.display = "none";
+              } else {
+                content.style.display = "block";
+              }
+            });
+
+            const textareaElement = document.createElement("textarea");
+            textareaElement.classList.add("content");
+            textareaElement.name = "";
+            textareaElement.id = "";
+            textareaElement.cols = "20";
+            textareaElement.rows = "10";
+            textareaElement.placeholder = "오늘 하루의 감정을 알려주세요!";
+
+            const savedContent = getItem(dateTextForStorage);
+
+            if (savedContent !== null) {
+              textareaElement.value = savedContent;
+            }
+
+            // const savedContent = getItem(i);
+            // if (savedContent !== null) {
+            //   textareaElement.value = savedContent;
+            // }
+
+            entryElement.appendChild(collapsibleButton);
+            entryElement.appendChild(textareaElement);
+
+            diaryContainer.appendChild(entryElement);
+          }
+        }
+
+        // 다이어리 업데이트
+        // updateDiaryEntries();
+
+        // 이전주 이동 함수
+        function beforeWeek() {
+          currentDate.setDate(currentDate.getDate() - 7);
+          updateDiaryEntries();
+        }
+
+        // 다음 주 이동 함수
+        function afterWeek() {
+          currentDate.setDate(currentDate.getDate() + 7);
+          updateDiaryEntries();
+        }
+
+        // 버튼 클릭 이벤트 추가
+        // document
+        //   .querySelector(".beforeWeek")
+        //   .addEventListener("click", beforeWeek);
+        // document
+        //   .querySelector(".afterWeek")
+        //   .addEventListener("click", afterWeek);
+
+        // 버튼 클릭 이벤트 추가
+        document
+          .querySelector(".beforeWeek")
+          .addEventListener("click", function () {
+            beforeWeek();
+          });
+
+        // 다음 주 이동 버튼에 이벤트 리스너 추가
+        document
+          .querySelector(".afterWeek")
+          .addEventListener("click", function () {
+            afterWeek();
+          });
+
+        updateDiaryEntries();
+      });
+
+      // 주간 변경 함수
+      function changeWeek(offset) {
+        currentDate.setDate(currentDate.getDate() + offset);
+        updateDiaryEntries();
+      }
+
+      // 저장 함수
+      function save() {
+        const collElements = document.querySelectorAll(".collapsible");
+        const contElements = document.querySelectorAll(".content");
+
+        for (let i = 0; i < collElements.length; i++) {
+          let saveDate = collElements[i].getAttribute("data-date");
+          // .replace(/\s/g, "");
+          let saveContent = contElements[i].value;
+
+          let data = { 날짜: saveDate, 내용: saveContent };
+
+          // 객체를 문자열로 변경해서 저장 (JSON)
+          localStorage.setItem(`데이터_${saveDate}`, JSON.stringify(data));
+        }
+
+        // 저장 후 다시 불러오기
+        loadDiaryEntries();
+      }
+
+      // 불러오기 함수
+      function loadDiaryEntries() {
+        const collElements = document.querySelectorAll(".collapsible");
+        const contElements = document.querySelectorAll(".content");
+
+        for (let i = 0; i < collElements.length; i++) {
+          // 수정된 부분
+          let saveDate = collElements[i].getAttribute("data-date");
+          let savedContent = getItem(saveDate);
+
+          if (savedContent !== null) {
+            contElements[i].value = savedContent;
+          }
+        }
+      }
+
+      // getItem 함수
+      function getItem(date) {
+        let jsonString = localStorage.getItem(`데이터_${date}`);
+        if (jsonString) {
+          let data = JSON.parse(jsonString);
+          return data.내용;
+        }
+        return null;
+      }
+    </script>
+  </body>
+</html>
