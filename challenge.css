@@ -1,0 +1,364 @@
+section {
+    margin: 2% auto 0 auto;
+    width: 80%;
+}
+
+.title {
+    line-height: 40px;
+}
+
+.mainTitle {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.first {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+#number {
+    font-size: 15px;
+    line-height: 17px;
+}
+
+.second {
+    font-size: 15px;
+    line-height: 17px;
+}
+
+button {
+    background-color: #dadada;
+    width: 67px;
+    height: 30px;
+    line-height: 20px;
+    border-radius: 4px;
+    border: none;
+    padding: 7px;
+    margin: 0px;
+}
+
+input {
+    /* width: 250px; */
+    margin: auto;
+    border: solid;
+    border-width: 1px;
+    border-color: #3333336c;
+    text-align: center;
+    width: 80%;
+    height: 30px;
+}
+
+table {
+    text-align: center;
+    /* border: 1px solid #33333367; */
+    border: none;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #FADEDA;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #f8d0ca;
+}
+
+
+
+
+/* 첫화면 입력버튼 */
+
+.addbutton {
+    margin: 20px 0;
+    padding: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    height: fit-content;
+    /* border: 1px solid rgb(184, 184, 184); */
+    /* box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37); */
+    border-radius: 10px;
+
+}
+
+#addbutton {
+    box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37);
+}
+
+.addbutton table {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.save {
+    margin-bottom: 10px;
+    /* box-shadow: 1px 1px 5px 0px gray; */
+}
+
+
+
+.addbutton td {
+
+    padding: 20px 0;
+}
+
+.tdInput {
+    width: 500px;
+    text-align: left;
+}
+
+.tdContent {
+    width: 200px;
+}
+
+select {
+    border: solid;
+    border-width: 1px;
+    border-color: #3333336c;
+    text-align: center;
+    width: 81%;
+    height: 31px;
+}
+
+#startDay,
+#endDay {
+    width: 37.5%;
+    height: 30px;
+}
+
+/* 챌린지 요소 */
+.challenge-current {
+    width: 80%;
+
+}
+
+#container {
+    padding: 25px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: max-content;
+    margin: auto;
+    gap: 20px;
+    /* 각 챌린지 요소 사이의 간격 설정 */
+}
+
+#container>div {
+    width: calc(33.333% - 15.5px);
+    font-size: 14px;
+    /* 한 줄에 세 개씩, 간격은 gap으로 조절 */
+    box-sizing: border-box;
+    padding: 2%;
+    line-height: 28px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37);
+    height: 400px;
+    color: #333;
+    margin-bottom: 15px;
+    /* 아래쪽 간격 추가 */
+
+
+
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+
+    }
+
+}
+
+.card button {
+    margin: 0;
+    padding: 0;
+}
+
+
+.card .icon {
+    width: 10%;
+    font-size: 25px;
+}
+
+.card .detail {
+    width: 80%;
+    text-align: left;
+    font-weight: 600;
+    font-size: 20px
+}
+
+.card .xbutton {
+    width: 10%;
+
+}
+
+#inputDiv>input {
+    height: 20px;
+    margin: 5px 0px;
+    border: 0.5px solid #33333342;
+}
+
+#inputDiv button {
+    width: 36px;
+    height: 24px;
+    font-size: 12px;
+    padding: 0;
+    position: relative;
+    margin-right: 10%;
+    border-radius: 4px;
+
+}
+
+
+progress {
+    margin-left: 5px;
+}
+
+#tabel {
+    width: 96%;
+    height: 25%;
+    overflow: auto;
+    font-size: 12px;
+}
+
+#tabel th,
+td {
+    border: none;
+}
+
+.deleteChallenge {
+    border: none;
+    width: auto;
+    font-size: 22px;
+}
+
+#deleteTd {
+    width: 30px;
+    border: none;
+    background-color: #33333300;
+
+}
+
+progress {
+    height: 15px;
+    width: 95%;
+    border-radius: 0;
+
+}
+
+progress::-webkit-progress-bar {
+    background-color: #e6e6e6;
+}
+
+progress::-webkit-progress-value {
+    background-color: #FF7171;
+}
+
+
+
+th {
+    height: fit-content;
+    line-height: 17px;
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+    background-color: #FADEDA;
+}
+
+@media all and (min-width:768px) and (max-width:1023px) {
+
+    /* body {background-color: blue;} */
+    .header img {
+        margin: auto;
+    }
+
+    .cha-nav {
+        display: none;
+    }
+
+    .cha-content {
+        left: 0;
+        width: 100vw;
+    }
+
+    #container>div {
+        width: calc(50% - 15.1px);
+    }
+
+}
+
+@media all and (max-width:767px) {
+    body {
+        text-align: center;
+    }
+
+    /* body {background-color: blue;} */
+    .header img {
+        margin: auto;
+    }
+
+    .cha-nav {
+        display: none;
+    }
+
+    .cha-content {
+        left: 0;
+        width: 100vw;
+    }
+
+    #container>div {
+        width: calc(100% - 15.1px);
+    }
+
+    section {
+        width: 95%;
+    }
+
+    .challenge-current {
+        width: 95%;
+    }
+
+    #tabel {
+        font-size: 10px;
+    }
+
+    #addbutton tr {
+        display: block;
+        box-sizing: border-box;
+    }
+
+    #addbutton td {
+        display: block;
+        box-sizing: border-box;
+    }
+
+    .addbutton td {
+        padding: 10px 0;
+        /* border: 1px solid black; */
+    }
+
+    .tdContent {
+        width: 100%;
+    }
+
+    .tdInput {
+        width: 100%;
+        text-align: center;
+    }
+    .addbutton{
+        justify-content: center;
+    }
+
+}

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>challenge</title>
+    <script src="https://kit.fontawesome.com/9c0c1d590d.js" crossorigin="anonymous"></script>
+<!-- 
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script> -->
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+    <link href="./challenge.css" rel="stylesheet">
+    <link href="./index.css" rel="stylesheet">
+    <script src="./index.js"></script>
+
+    <link rel="icon" href="./img/face.png" type="image/x-icon">
+
+</head>
+
+
+
+<body>
+    <div class="header">
+        <img src="./img/logo.png" onclick="location.href='./main.html'" />
+        <div class="loginBtn" onclick="location.href='./login.html'">로그인</div>
+        <!-- <i class="fa-solid fa-bars"></i> -->
+        <img src="./img/menu.svg" class="menuBtn" alt="menubar" />
+
+        <div class="user-profile">
+            <div class="user-name">환영합니다<br /></div>
+            <img id="profile" src="./img/face.png" />
+        </div>
+        <div class="user-name-span">
+            <div class="logoutBtn" onclick="logout();">로그아웃</div>
+        </div>
+    </div>
+
+    <div class="cha-container">
+        <div class="cha-nav">
+            <div class="nav-loginBtn" onclick="location.href='./login.html'">
+                로그인
+            </div>
+            <div class="nav-user-profile">
+                <div class="nav-user-name">환영합니다<br /></div>
+                <img id="profile" src="./img/face.png" />
+            </div>
+            <div class="nav-user-name-span">
+                <div class="nav-logoutBtn" onclick="logout();">로그아웃</div>
+            </div>
+            <!-- <div class="nav-user-name-span">
+                  <div onclick="logout();">로그아웃</div>
+              </div> -->
+            <ul class="nav-menu">
+                <a href="./main.html">
+                    <li class="navi-li">
+                        <img src="./img/fedger.svg" class="li-img" />감정소비 가계부
+                    </li>
+                </a>
+                <a href="./diary.html">
+                    <li class="navi-li">
+                        <img src="./img/diary.svg" class="li-img" />다이어리
+                    </li>
+                </a>
+                <a href="./challenge.html">
+                    <li class="navi-li">
+                        <img src="./img/challenge.svg" class="li-img" />챌린지
+                    </li>
+                </a>
+            </ul>
+
+            <div class="tetris">
+                <img class="t-sad" src="./img/sad.png" />
+                <img class="t-happy" src="./img/happy.png" />
+                <img class="t-boring" src="./img/boring.png" />
+                <img class="t-frustrating" src="./img/frustrating.png" />
+                <img class="t-angry" src="./img/angry.png" />
+            </div>
+        </div>
+
+        <div class="cha-content">
+            <main>
+                <section>
+                    <div class="title">
+                        <div class="mainTitle">챌린지</div>
+                        <div class="second">목표를 달성하세요!</div>
+                    </div>
+
+
+                    <div class="addbutton">
+
+                        <table align="center" id="addbutton">
+                            <tr>
+                                <td class="tdContent">
+                                    도전기간
+                                </td>
+                                <td class="tdInput">
+                                    <input type="date" id="startDay">
+                                    ~
+                                    <input type="date" id="endDay">
+                                </td>
+                                <td class="tdContent">
+                                    카테고리
+
+                                </td>
+                                <td class="tdInput">
+                                    <select name="category" id="category">
+                                        <optgroup>
+                                            <option value="travel">여행</option>
+                                            <option value="shopping">쇼핑</option>
+                                            <option value="culture">문화</option>
+                                            <option value="hobby">취미</option>
+                                        </optgroup>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdContent">
+                                    세부계획
+                                </td>
+                                <td class="tdInput">
+                                    <input type="text" id="detail" placeholder="ex) 애플워치, 유럽여행">
+                                </td>
+                                <td class="tdContent">
+                                    목표금액
+                                </td>
+                                <td class="tdInput">
+                                    <input type="number" id="goal" placeholder="목표금액"><br>
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td style="text-align: center; padding: 0% 6.5%;" colspan="4"></td>
+
+
+                            </tr> -->
+
+                        </table>
+                        <button class="save" onclick="addChallenge(this)">저장</button>
+                        <br>
+                    </div>
+                </section>
+
+                <section class="challenge-current">
+                    <div class="title">
+                        <div class="first">진행중인 챌린지</div>
+                        <div id="number">
+                            <div class="second">현재 진행중인 챌린지가 없습니다! <br> 챌린지를 추가해보세요</div>
+                        </div>
+
+                    </div>
+                    <div id="container">
+                        <!-- 챌린지 추가되는 부분 -->
+                    </div>
+
+                </section>
+            </main>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        let n = 0;
+
+        //로컬 스토리지에서 데이터 불러오기
+        document.addEventListener('DOMContentLoaded', function () {
+
+            for (let i = localStorage.length - 1; i >= 0; i--) {
+                console.log(i);
+
+                const key = localStorage.key(i);
+
+                if (key.startsWith('challenge_')) {
+                    const data = JSON.parse(localStorage.getItem(key));
+                    addChallengeWithData(data);
+                }
+            }
+        });
+
+
+        //저장된 데이터로 챌린지 추가하기
+        function addChallengeWithData(data) {
+            n = data.n;
+            startDay = data.startDay;
+            endDay = data.endDay;
+            detail = data.detail;
+            goal = data.goal;
+            category = data.category;
+            value = data.value;
+            table = data.table;
+            let div = document.createElement('div');
+            addchallengeDiv(div, n, startDay, endDay, detail, goal, category, value, table);
+        }
+
+
+
+        // 현재 날짜를 가져오는 함수
+        function getCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            let month = today.getMonth() + 1; // 월은 0부터 시작하므로 1을 더함
+            let day = today.getDate();
+
+            // 한 자리 숫자인 경우 앞에 0을 추가
+            month = month < 10 ? '0' + month : month;
+            day = day < 10 ? '0' + day : day;
+
+            return `${year}-${month}-${day}`;
+        }
+
+
+
+        // date input에 오늘 날짜를 설정
+        document.getElementById('startDay').value = getCurrentDate();
+
+
+        let category = "";
+        let i = 0; // 현재 챌린지 개수?
+        let challengeIs = document.getElementById('number');
+
+
+
+
+        //추가 버튼 누르면 새로운 div에 챌린지 추가
+        function addChallenge(clickedButton) {
+            n++;
+
+
+            let date_now = new Date();
+            let Month = date_now.getMonth() + 1;
+            let startDay = date_now.getFullYear()
+                + '-'
+                + Month
+                + '-'
+                + date_now.getDate();
+
+            let endDay = document.getElementById('endDay').value;
+            let detail = document.getElementById('detail').value;
+            if (detail == NaN) {
+                detail = " ";
+
+            }
+            let goal = document.getElementById('goal').value;
+            let category = document.getElementById('category').value;
+
+            if (!goal) {
+                alert("목표금액을 입력해주세요");
+                document.getElementById('goal').value = "";
+
+            }
+            else {
+                let div = document.createElement('div');
+
+                div.style.animation = "appear 1.5s linear 0s 1 alternate backwards";
+
+                addchallengeDiv(div, n, startDay, endDay, detail, goal, category);
+                saveToLocalStorage(n, startDay, endDay, detail, goal, category); //로컬 스토리지에 데이터 저장
+
+            }
+
+        }
+        //로컬 스토리지에 데이터 저장하는 함수
+        function saveToLocalStorage(n, startDay, endDay, detail, goal, category) {
+            table = [];
+            const data = {
+                n: n,
+                startDay: startDay,
+                endDay: endDay,
+                detail: detail,
+                goal: goal,
+                category: category,
+                table: table
+            };
+            //로컬 스토리지에 데이터를 저장
+            const key = `challenge_${n}`;
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        //추가 함수
+        function addchallengeDiv(div, n, startDay, endDay, detail, goal, category, value, table) {
+
+            let parent = document.getElementById('container');
+            div.id = `${n}`;
+            div.classList.add('challenge_');
+
+            switch (category) {
+
+                case ('travel'):
+                    div.innerHTML = `<table class="card">`
+                        + `<tr><td class="icon"><i class="fa-solid fa-plane"></i></td>`
+                        + `<td class="detail">${detail}</td>`
+                        + `<td class="xbutton"><button class="deleteChallenge" style="text-align:right; background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
+                        + `</tr></table>`
+                    break;
+                case ('shopping'):
+                    div.innerHTML = `<table class="card">`
+                        + `<tr><td class="icon"><i class="fa-solid fa-basket-shopping"></i></td>`
+                        + `<td class="detail">${detail}</td>`
+                        + `<td class="xbutton"><button class="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
+                        + `</tr></table>`
+
+                    break;
+                case ('culture'):
+                    div.innerHTML = `<table class="card">`
+                        + `<tr><td class="icon"><i class="fa-solid fa-film"></i></td>`
+                        + `<td class="detail">${detail}</td>`
+                        + `<td class="xbutton"><button class="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
+                        + `</tr></table>`
+
+
+                    break;
+                case ('hobby'):
+                    div.innerHTML = `<table class="card">`
+                        + `<tr><td class="icon"><i class="fa-solid fa-basketball"></i></td>`
+                        + `<td class="detail">${detail}</td>`
+                        + `<td class="xbutton"><button class="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
+                        + `</tr></table>`
+                    break;
+            }
+
+            if (value == undefined) {
+                value = 0;
+            }
+
+            div.innerHTML += `기간: ${startDay}~${endDay}<br>`
+                + `<progress id="progress" max="${goal}" value="${value}"></progress><br>`
+                + `<label for="progress"><span>${value} </span><span>/ ${goal}</span></label>`
+                + '<div>나의 절약기록</div>'
+
+                + `<div id='inputDiv' style="display: block; height: fit-content;">
+                
+                    <label for="content">내역:</label>
+                    
+    <input type="text" id="content" placeholder="내역"><br>
+    <label for="amount">금액:</label>
+    <input type="text" id="amount" placeholder="금액 입력"><br>
+    <div style="text-align:right"><button class="save" onclick="saveAmount(this)">저장</button></div></div>
+`
+                + `<div id="tabel"><table border="1" class="table2">
+    <thead>
+        <tr>
+            <th>내역</th>
+            <th>금액</th>
+            <th>날짜</th>
+            <th style="width:15%">X</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table></div>`
+
+            if (table && table.length > 0) {
+                // 데이터로 테이블 채우기
+                let tableBody = div.querySelector('.table2 tbody');
+                for (let i = 0; i < table.length; i++) {
+                    let newRow = tableBody.insertRow(tableBody.rows.length);
+                    for (let j = 0; j < table[i].length; j++) {
+                        let newCell = newRow.insertCell(j);
+                        newCell.innerHTML = table[i][j];
+                    }
+                }
+            }
+
+
+            parent.appendChild(div);
+
+            //table에 추가하는 함수
+
+
+
+            i++;
+            if (i === 0) {
+                n = 0;
+                challengeIs.style.display = 'block';
+
+            }
+            else {
+                challengeIs.innerHTML = `${i}개 챌린지 진행중!`;
+            }
+
+
+            document.getElementById('goal').value = "";
+            document.getElementById('detail').value = "";
+            document.getElementById('category').value = "travel";
+            document.getElementById('endDay').value = "";
+        }
+
+        //삭제버튼 누르면 챌린지 삭제
+        function remove(clickedButton) {
+
+            let challengeDiv = findAncestor(clickedButton, 'challenge_');
+            let challengeId = challengeDiv.id;
+
+            // 로컬 스토리지에서 해당 ID에 해당하는 데이터 삭제
+            removeChallengeFromLocalStorage(challengeId);
+
+            i--;
+
+
+            let td = clickedButton.parentNode;
+            let tr = td.parentNode;
+
+            let table = tr.parentNode;
+            let table1 = table.parentNode
+            let removeDiv = table1.parentNode;
+
+
+
+
+            removeDiv.parentNode.removeChild(removeDiv);
+            if (i === 0) {
+                n = 0;
+                challengeIs.innerHTML = `<div>현재 진행중인 챌린지가 없습니다.<br>챌린지를 추가해보세요</div>`;
+
+            }
+            else {
+                challengeIs.innerHTML = `<div>${i}개 챌린지 진행중!</div>`;
+            }
+        }
+        function findAncestor(el, className) {
+            while ((el = el.parentElement) && !el.classList.contains(className));
+            return el;
+        }
+        function removeChallengeFromLocalStorage(challengeId) {
+            const key = `challenge_${challengeId}`;
+            localStorage.removeItem(key);
+
+        }
+
+
+        //내역 입력 후 저장 버튼 누르면 테이블에 추가+
+        //progress bar에 반영됨
+        function saveAmount(clickedButton) {
+            let parent1 = clickedButton.parentNode;
+            let parent = parent1.parentNode;
+
+            let contentLabel = parent.firstElementChild;
+            let content = contentLabel.nextElementSibling.value;
+
+            let amountLabel = parent.querySelector('input:nth-child(5)');
+
+            let amount = amountLabel.value;
+            if (amount === "") {
+                alert("금액을 입력하세요!");
+                amountLabel.value = "";
+                contentLabel.nextElementSibling.value = "";
+            }
+            else {
+                if (isNaN(amount)) {
+                    alert("금액은 숫자로 입력해주세요");
+                    amountLabel.value = "";
+                    contentLabel.nextElementSibling.value = "";
+                }
+
+
+                else {
+                    // 테이블에 새로운 행 추가
+                    let parentDiv = parent.parentNode;
+                    let table = parentDiv.querySelector('.table2');
+
+                    let tableBody = table.querySelector('tbody');
+                    let rows = table.rows;
+
+                    let newRow = tableBody.insertRow(tableBody.rows.length);
+
+                    let cell1 = newRow.insertCell(0);
+                    cell1.innerHTML = content;
+
+                    let cell2 = newRow.insertCell(1);
+                    cell2.innerHTML = amount;
+
+                    let cell3 = newRow.insertCell(2);
+                    date_now = new Date();
+                    let Month = date_now.getMonth() + 1;
+                    let today =
+                        Month
+                        + '-'
+                        + date_now.getDate()
+                        + '<br>('
+                        + date_now.getHours()
+                        + ':'
+                        + date_now.getMinutes()
+                        + ')'
+
+
+
+
+                    cell3.innerHTML = today;
+
+                    let cell4 = newRow.insertCell(3);
+                    cell4.innerHTML = `<button id="deleteTd" onclick="removeTr(this)"><i class="fa-solid fa-xmark"></i></button>`
+
+
+                    // 입력 창 초기화
+                    amountLabel.value = ""
+                    contentLabel.nextElementSibling.value = ""
+
+                    //합 구하기
+
+                    let numCols = rows[0].cells.length;
+                    let colSums = new Array(numCols).fill(0);
+
+                    for (let j = 1; j < rows.length; j++) {
+                        colSums[1] += parseInt(rows[j].cells[1].textContent) || 0;
+                    }
+
+                    let itemDiv = parent.parentNode;
+                    let progress = itemDiv.querySelector('progress');
+                    let newValue = colSums[1];
+                    progress.value = newValue;
+
+                    //label값 변경하기
+                    let labelProgress = itemDiv.querySelector('span');
+                    labelProgress.textContent = `${newValue}`
+
+                    newArray = [cell1.innerHTML, cell2.innerHTML, cell3.innerHTML, cell4.innerHTML]
+
+
+                    let challengeDiv = findAncestor(clickedButton, 'challenge_');
+                    let id = challengeDiv.id;
+                    let challengeData = JSON.parse(localStorage.getItem(`challenge_${id}`));
+
+                    challengeData.table.push(newArray);
+                    challengeData.value = newValue;
+                    localStorage.setItem(`challenge_${id}`, JSON.stringify(challengeData));
+                }
+
+            }
+        }
+
+        //내역 삭제
+        function removeTr(clickedButton) {
+            let td = clickedButton.parentNode;
+            tr = td.parentNode;
+            subTd = tr.querySelector("td:nth-child(2)");
+            sub = Number(subTd.innerHTML)
+            subTdcontent = tr.querySelector("td:nth-child(1)");
+            subContent = subTdcontent.innerHTML;
+            subTdDate = tr.querySelector("td:nth-child(3)");
+            subDate = subTdDate.innerHTML;
+
+            tbody = tr.parentNode;
+            table = tbody.parentNode;
+            tableDiv = table.parentNode;
+            itemDiv = tableDiv.parentNode;
+
+            label = itemDiv.querySelector('span');
+            valueBefore = label.innerHTML
+            value = valueBefore -= sub;
+            label.innerHTML = value;
+
+            progress = itemDiv.querySelector('progress');
+
+            progress.value = value;
+
+            td.parentNode.remove(td);
+
+
+            let challengeDiv = findAncestor(tableDiv, 'challenge_');
+            let id = challengeDiv.id;
+            let challengeData = JSON.parse(localStorage.getItem(`challenge_${id}`));
+
+            for (let i = 0; i < challengeData.table.length; i++) {
+                if (challengeData.table[i][0] == subContent && challengeData.table[i][1] == sub && challengeData.table[i][2] == subDate) {
+                    // 내역 삭제
+                    challengeData.table.splice(i, 1);
+                    break;
+                }
+            }
+            challengeData.value = value;
+            localStorage.setItem(`challenge_${id}`, JSON.stringify(challengeData));
+
+
+        }
+    </script>
+</body>
+
+</html>
