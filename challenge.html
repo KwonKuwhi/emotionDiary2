@@ -12,379 +12,68 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
         integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/837ff3adc1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./CSS_challenge.css">
-
-    <style>
-        section {
-            margin: 2% auto 0 auto;
-            width: 80%;
-        }
-
-        .title {
-            line-height: 40px;
-        }
-
-        .mainTitle {
-            font-size: 32px;
-            font-weight: 700;
-        }
-
-        .first {
-            font-size: 25px;
-            font-weight: 700;
-        }
-
-        #number {
-            font-size: 15px;
-            line-height: 17px;
-        }
-
-        .second {
-            font-size: 15px;
-            line-height: 17px;
-        }
-
-        button {
-            background-color: #dadada;
-            width: 67px;
-            height: 30px;
-            line-height: 20px;
-            border-radius: 4px;
-            border: none;
-            padding: 7px;
-            margin: 0px;
-        }
-
-        input {
-            /* width: 250px; */
-            margin: auto;
-            border: solid;
-            border-width: 1px;
-            border-color: #3333336c;
-            text-align: center;
-            width: 80%;
-            height: 30px;
-        }
-
-        table {
-            text-align: center;
-            /* border: 1px solid #33333367; */
-            border: none;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #f8d0ca;
-            cursor: pointer;
-        }
-
-
-
-
-        /* 첫화면 입력버튼 */
-
-        .addbutton {
-            margin: 20px 20px;
-            padding: auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            height: fit-content;
-            /* border: 1px solid rgb(184, 184, 184); */
-            /* box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37); */
-            border-radius: 10px;
-
-        }
-        #addbutton{
-            box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37);
-        }
-
-        .addbutton table {
-            text-align: center;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        .save {
-            margin-bottom: 10px;
-            /* box-shadow: 1px 1px 5px 0px gray; */
-        }
-
-        button:active {
-            box-shadow: none
-        }
-
-        .addbutton td {
-
-            padding: 20px 0;
-        }
-
-        .tdInput {
-            width: 500px;
-            text-align: left;
-        }
-
-        .tdContent {
-            width: 200px;
-        }
-
-        select {
-            border: solid;
-            border-width: 1px;
-            border-color: #3333336c;
-            text-align: center;
-            width: 81%;
-            height: 31px;
-        }
-
-        #startDay,
-        #endDay {
-            width: 37.5%;
-            height: 30px;
-        }
-
-        /* 챌린지 요소 */
-        .challenge-current {
-            width: 80%;
-
-        }
-
-        #container {
-            padding: 25px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            align-items: flex-start;
-            height: max-content;
-            margin: auto;
-            gap: 15.5px;
-            /* 각 챌린지 요소 사이의 간격 설정 */
-        }
-
-        #container>div {
-            width: calc(33.333% - 15.5px);
-            font-size: 14px;
-            /* 한 줄에 세 개씩, 간격은 gap으로 조절 */
-            box-sizing: border-box;
-            padding: 2%;
-            line-height: 33px;
-            border-radius: 10px;
-            box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37);
-            height: 400px;
-            color: #333;
-            margin-bottom: 15px;
-            /* 아래쪽 간격 추가 */
-        }
-
-        .card button {
-            margin: 0;
-            padding: 0;
-        }
-
-
-        .card .icon {
-            width: 10%;
-            font-size: 25px;
-        }
-
-        .card .detail {
-            width: 80%;
-            text-align: left;
-            font-weight: 600;
-            font-size: 20px
-        }
-
-        .card .xbutton {
-            width: 10%;
-
-        }
-
-        #inputDiv>input {
-            height: 20px;
-            margin: 5px 0px;
-        }
-
-        #inputDiv button {
-            width: 36px;
-            height: 24px;
-            font-size: 12px;
-            padding: 0;
-            position: relative;
-            margin-right: 10%;
-            border-radius: 4px;
-
-        }
-
-
-        progress {
-            margin-left: 5px;
-        }
-
-        #tabel {
-            width: 91%;
-            height: 25%;
-            overflow: auto;
-            font-size: 12px;
-        }
-
-        #tabel th,
-        td {
-            border: none;
-        }
-
-        .deleteChallenge {
-            border: none;
-            width: auto;
-            font-size: 22px;
-        }
-
-        #deleteTd {
-            width: 30px;
-            border: none;
-            background-color: #33333300;
-
-        }
-
-        progress {
-            height: 15px;
-            width: 95%;
-            border-radius: 0;
-
-        }
-
-        progress::-webkit-progress-bar {
-            background-color: #e6e6e6;
-        }
-
-        progress::-webkit-progress-value {
-            background-color: #FF7171;
-        }
-
-
-
-        th {
-            height: fit-content;
-            line-height: 17px;
-            font-size: 14px;
-            position: sticky;
-            top: 0;
-            background-color: #FADEDA;
-        }
-
-        @media all and (min-width:768px) and (max-width:1023px) {
-
-            /* body {background-color: blue;} */
-            .header img {
-                margin: auto;
-            }
-
-            .cha-nav {
-                display: none;
-            }
-
-            .cha-content {
-                left: 0;
-                width: 100vw;
-            }
-
-            #container>div {
-                width: calc(50% - 15.1px);
-            }
-
-        }
-
-        @media all and (max-width:767px) {
-            body{
-                text-align: center;
-            }
-
-            /* body {background-color: blue;} */
-            .header img {
-                margin: auto;
-            }
-
-            .cha-nav {
-                display: none;
-            }
-
-            .cha-content {
-                left: 0;
-                width: 100vw;
-            }
-
-            #container>div {
-                width: calc(100% - 15.1px);
-            }
-
-            section {
-                width: 95%;
-            }
-
-            .challenge-current {
-                width: 95%;
-            }
-
-            #tabel {
-                font-size: 10px;
-            }
-
-            #addbutton tr {
-                display: block;
-                box-sizing: border-box;
-            }
-
-            #addbutton td {
-                display: block;
-                box-sizing: border-box;
-            }
-
-            .addbutton td {
-                padding: 10px 0;
-                /* border: 1px solid black; */
-            }
-
-            .tdContent {
-                width: 100%;
-            }
-
-            .tdInput {
-                width: 100%;
-                text-align: center;
-            }
-
-        }
-    </style>
-
+  
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+    <link href="./challenge.css" rel="stylesheet">
+    <link href="./index.css" rel="stylesheet">
+    
+    <link rel="icon" href="./img/face.png" type="image/x-icon">
+    <script src="./index.js"></script>
 </head>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 <body>
-    <header>
-        <div class="header"><img src="./img/logo.png"></div>
-    </header>
+    <div class="header">
+        <img src="./img/logo.png" onclick="location.href='./main.html'">
+        <div class="loginBtn" onclick="location.href='./login.html'"> 로그인</div>
+        <!-- <i class="fa-solid fa-bars"></i> -->
+        <img src="./img/menu.svg" class="menuBtn">
+        
+        <div class="user-profile">
+            <div class="user-name">환영합니다<br></div>
+            <img id="profile" src="./img/face.png">
+        </div>
+        <div class="user-name-span">
+            <div class="logoutBtn" onclick="logout();">로그아웃</div>
+        </div>
+
+    </div>
+    <!-- <div class="slide-nav"></div> -->
     <div class="cha-container">
         <div class="cha-nav">
-            <a href="./index.html">
-                <div class="nav cha-fedger"> <i class="fa-solid fa-calendar"></i>감정소비 가계부</div>
-            </a>
-            <a href="./index.html">
-                <div class="nav cha-diary"><i class="fa-solid fa-book"></i>다이어리</div>
-            </a>
-            <a href="./index.html">
-                <div class="nav cha-challenge"><i class="fa-solid fa-square-check"></i>챌린지</div>
-            </a>
+            <div class="nav-loginBtn" onclick="location.href='./login.html'">로그인</div>
+            <div class="nav-user-profile">
+                <div class="nav-user-name">환영합니다<br></div>
+                <img id="profile" src="./img/face.png">
+            </div>
+            <div class="nav-user-name-span">
+                <div class="nav-logoutBtn" onclick="logout();">로그아웃</div>
+            </div>
+            <!-- <div class="nav-user-name-span">
+                <div onclick="logout();">로그아웃</div>
+            </div> -->
+            <ul class="nav-menu">
+                
+                <a href="./index.html">
+                    <li class="navi-li">
+                        <img src="./img/fedger.svg" class="li-img">감정소비 가계부
+                    </li>
+                </a>
+                <a href="./index.html">
+                    <li class="navi-li">
+                        <img src="./img/diary.svg" class="li-img">다이어리
+                    </li>
+                </a>
+                <a href="./index.html">
+                    <li class="navi-li">
+                        <img src="./img/challenge.svg" class="li-img">챌린지
+                    </li>
+                </a>
+            </ul>
+            
             <div class="tetris">
                 <img class="t-sad" src="./img/sad.png">
                 <img class="t-happy" src="./img/happy.png">
@@ -403,6 +92,7 @@
 
 
                     <div class="addbutton">
+                        
                         <table align="center" id="addbutton">
                             <tr>
                                 <td class="tdContent">
@@ -449,20 +139,10 @@
                             </tr> -->
 
                         </table>
+                        <button class="save" onclick="addChallenge(this)">저장</button>
                         <br>
-                        <button class="save"
-                                        onclick="addChallenge(this)">저장</button>
-
-
-
-
                     </div>
                 </section>
-
-
-
-
-
 
                 <section class="challenge-current">
                     <div class="title">
@@ -472,64 +152,54 @@
                         </div>
 
                     </div>
-
-
                     <div id="container">
                         <!-- 챌린지 추가되는 부분 -->
-
                     </div>
 
                 </section>
             </main>
-
-
-
         </div>
     </div>
 
 
 
 
-
-
-
-
-
-
-
-
-
     <script>
-        let n=0;
-//로컬 스토리지에서 데이터 불러오기
-        document.addEventListener('DOMContentLoaded',function(){
-            
-            for(let i=localStorage.length-1;i>=0;i--){
+        let n = 0;
+        
+        //로컬 스토리지에서 데이터 불러오기
+        document.addEventListener('DOMContentLoaded', function () {
+
+            for (let i = localStorage.length-1; i >= 0; i--) {
+                console.log(i);
+                
                 const key = localStorage.key(i);
-                if(key.startsWith('challenge_')){
-                    const data=JSON.parse(localStorage.getItem(key));
+                
+                if (key.startsWith('challenge_')) {
+                    const data = JSON.parse(localStorage.getItem(key));
                     addChallengeWithData(data);
                 }
             }
         });
 
 
-//저장된 데이터로 챌린지 추가하기
-        function addChallengeWithData(data){
-            n=data.n;
-            startDay=data.startDay;
+        //저장된 데이터로 챌린지 추가하기
+        function addChallengeWithData(data) {
+            n = data.n;
+            startDay = data.startDay;
             endDay = data.endDay;
             detail = data.detail;
             goal = data.goal;
             category = data.category;
             value = data.value;
             table = data.table;
-            addchallengeDiv(n,startDay,endDay,detail,goal,category,value,table);
+            let div = document.createElement('div');
+            addchallengeDiv(div, n, startDay, endDay, detail, goal, category, value, table);
         }
 
 
 
-// 현재 날짜를 가져오는 함수
+        // 현재 날짜를 가져오는 함수
         function getCurrentDate() {
             const today = new Date();
             const year = today.getFullYear();
@@ -555,8 +225,8 @@
 
 
 
-        
-//추가 버튼 누르면 새로운 div에 챌린지 추가
+
+        //추가 버튼 누르면 새로운 div에 챌린지 추가
         function addChallenge(clickedButton) {
             n++;
 
@@ -578,35 +248,48 @@
             let goal = document.getElementById('goal').value;
             let category = document.getElementById('category').value;
 
-            addchallengeDiv(n,startDay,endDay,detail,goal,category);
-            saveToLocalStorage(n,startDay,endDay,detail,goal,category); //로컬 스토리지에 데이터 저장
+            if (!goal) {
+                alert("목표금액을 입력해주세요");
+                document.getElementById('goal').value = "";
+
+            }
+            else {
+                let div = document.createElement('div');
+
+                div.style.animation = "appear 1.5s linear 0s 1 alternate backwards";
+
+                addchallengeDiv(div, n, startDay, endDay, detail, goal, category);
+                saveToLocalStorage(n, startDay, endDay, detail, goal, category); //로컬 스토리지에 데이터 저장
+
+            }
+
         }
-//로컬 스토리지에 데이터 저장하는 함수
-        function saveToLocalStorage(n,startDay,endDay,detail,goal,category){
-            table=[];
+        //로컬 스토리지에 데이터 저장하는 함수
+        function saveToLocalStorage(n, startDay, endDay, detail, goal, category) {
+            table = [];
             const data = {
-                n:n,
-                startDay:startDay,
-                endDay:endDay,
-                detail:detail,
-                goal:goal,
-                category:category,
-                table:table
+                n: n,
+                startDay: startDay,
+                endDay: endDay,
+                detail: detail,
+                goal: goal,
+                category: category,
+                table: table
             };
             //로컬 스토리지에 데이터를 저장
             const key = `challenge_${n}`;
             localStorage.setItem(key, JSON.stringify(data));
-        }        
+        }
 
-//추가 함수
-        function addchallengeDiv(n,startDay,endDay,detail,goal,category,value,table){
-        let div = document.createElement('div');
-        let parent = document.getElementById('container');
+        //추가 함수
+        function addchallengeDiv(div, n, startDay, endDay, detail, goal, category, value, table) {
+
+            let parent = document.getElementById('container');
             div.id = `${n}`;
             div.classList.add('challenge_');
 
-        switch (category) {
-                
+            switch (category) {
+
                 case ('travel'):
                     div.innerHTML = `<table class="card">`
                         + `<tr><td class="icon"><i class="fa-solid fa-plane"></i></td>`
@@ -616,7 +299,7 @@
                     break;
                 case ('shopping'):
                     div.innerHTML = `<table class="card">`
-                        + `<tr><td class="icon"><i class="fa-solid fa-plane"></i></td>`
+                        + `<tr><td class="icon"><i class="fa-solid fa-basket-shopping"></i></td>`
                         + `<td class="detail">${detail}</td>`
                         + `<td class="xbutton"><button class="deleteChallenge" style="background-color:#ffffff00" onclick="remove(this)"><i class="fa-solid fa-xmark"></i></button></td>`
                         + `</tr></table>`
@@ -640,8 +323,8 @@
                     break;
             }
 
-            if(value==undefined){
-                value=0;
+            if (value == undefined) {
+                value = 0;
             }
 
             div.innerHTML += `기간: ${startDay}~${endDay}<br>`
@@ -661,26 +344,26 @@
                 + `<div id="tabel"><table border="1" class="table2">
     <thead>
         <tr>
-            <th style="width:35%">내역</th>
-            <th style="width:30%">금액</th>
-            <th style="width:20%">날짜</th>
-            <th style="width:15%">삭제</th>
+            <th>내역</th>
+            <th>금액</th>
+            <th>날짜</th>
+            <th style="width:15%">X</th>
         </tr>
     </thead>
     <tbody></tbody>
 </table></div>`
 
-if (table && table.length > 0) {
-        // 데이터로 테이블 채우기
-        let tableBody = div.querySelector('.table2 tbody');
-        for (let i = 0; i < table.length; i++) {
-            let newRow = tableBody.insertRow(tableBody.rows.length);
-            for (let j = 0; j < table[i].length; j++) {
-                let newCell = newRow.insertCell(j);
-                newCell.innerHTML = table[i][j];
+            if (table && table.length > 0) {
+                // 데이터로 테이블 채우기
+                let tableBody = div.querySelector('.table2 tbody');
+                for (let i = 0; i < table.length; i++) {
+                    let newRow = tableBody.insertRow(tableBody.rows.length);
+                    for (let j = 0; j < table[i].length; j++) {
+                        let newCell = newRow.insertCell(j);
+                        newCell.innerHTML = table[i][j];
+                    }
+                }
             }
-        }
-    }
 
 
             parent.appendChild(div);
@@ -691,7 +374,7 @@ if (table && table.length > 0) {
 
             i++;
             if (i === 0) {
-                n=0;
+                n = 0;
                 challengeIs.style.display = 'block';
 
             }
@@ -705,14 +388,15 @@ if (table && table.length > 0) {
             document.getElementById('category').value = "travel";
             document.getElementById('endDay').value = "";
         }
-        
-//삭제버튼 누르면 챌린지 삭제
+
+        //삭제버튼 누르면 챌린지 삭제
         function remove(clickedButton) {
+            
             let challengeDiv = findAncestor(clickedButton, 'challenge_');
             let challengeId = challengeDiv.id;
 
-    // 로컬 스토리지에서 해당 ID에 해당하는 데이터 삭제
-    removeChallengeFromLocalStorage(challengeId);
+            // 로컬 스토리지에서 해당 ID에 해당하는 데이터 삭제
+            removeChallengeFromLocalStorage(challengeId);
 
             i--;
 
@@ -729,7 +413,7 @@ if (table && table.length > 0) {
 
             removeDiv.parentNode.removeChild(removeDiv);
             if (i === 0) {
-                n=0;
+                n = 0;
                 challengeIs.innerHTML = `<div>현재 진행중인 챌린지가 없습니다.<br>챌린지를 추가해보세요</div>`;
 
             }
@@ -737,18 +421,19 @@ if (table && table.length > 0) {
                 challengeIs.innerHTML = `<div>${i}개 챌린지 진행중!</div>`;
             }
         }
-        function findAncestor(el, className){
+        function findAncestor(el, className) {
             while ((el = el.parentElement) && !el.classList.contains(className));
-    return el;
+            return el;
         }
         function removeChallengeFromLocalStorage(challengeId) {
-    const key = `challenge_${challengeId}`;
-    localStorage.removeItem(key);
-}
+            const key = `challenge_${challengeId}`;
+            localStorage.removeItem(key);
+
+        }
 
 
-//내역 입력 후 저장 버튼 누르면 테이블에 추가+
-//progress bar에 반영됨
+        //내역 입력 후 저장 버튼 누르면 테이블에 추가+
+        //progress bar에 반영됨
         function saveAmount(clickedButton) {
             let parent1 = clickedButton.parentNode;
             let parent = parent1.parentNode;
@@ -759,85 +444,95 @@ if (table && table.length > 0) {
             let amountLabel = parent.querySelector('input:nth-child(5)');
 
             let amount = amountLabel.value;
-
-
-
-            // 테이블에 새로운 행 추가
-            let parentDiv = parent.parentNode;
-            let table = parentDiv.querySelector('.table2');
-
-            let tableBody = table.querySelector('tbody');
-            let rows = table.rows;
-
-            let newRow = tableBody.insertRow(tableBody.rows.length);
-
-            let cell1 = newRow.insertCell(0);
-            cell1.innerHTML = content;
-
-            let cell2 = newRow.insertCell(1);
-            cell2.innerHTML = amount;
-
-            let cell3 = newRow.insertCell(2);
-            date_now = new Date();
-            let Month = date_now.getMonth() + 1;
-            let today =
-                Month
-                + '-'
-                + date_now.getDate()
-                +'('
-                + date_now.getHours()
-                +':'
-                + date_now.getMinutes()
-                +')'
-                console.log(today);
-
-
-
-            cell3.innerHTML = today;
-
-            let cell4 = newRow.insertCell(3);
-            cell4.innerHTML = `<button id="deleteTd" onclick="removeTr(this)"><i class="fa-solid fa-xmark"></i></button>`
-
-            
-            // 입력 창 초기화
-            amountLabel.value = ""
-            contentLabel.nextElementSibling.value = ""
-
-            //합 구하기
-
-            let numCols = rows[0].cells.length;
-            let colSums = new Array(numCols).fill(0);
-
-            for (let j = 1; j < rows.length; j++) {
-                colSums[1] += parseInt(rows[j].cells[1].textContent) || 0;
+            if(amount===""){
+                alert("금액을 입력하세요!");
+                amountLabel.value = "";
+                contentLabel.nextElementSibling.value = "";
+            }
+            else{
+                if (isNaN(amount)) {
+                alert("금액은 숫자로 입력해주세요");
+                amountLabel.value = "";
+                contentLabel.nextElementSibling.value = "";
             }
 
-            let itemDiv = parent.parentNode;
-            let progress = itemDiv.querySelector('progress');
-            let newValue = colSums[1];
-            progress.value = newValue;
-
-            //label값 변경하기
-            let labelProgress = itemDiv.querySelector('span');
-            labelProgress.textContent = `${newValue}`
             
-            newArray=[cell1.innerHTML,cell2.innerHTML,cell3.innerHTML,cell4.innerHTML]
+            else {
+                // 테이블에 새로운 행 추가
+                let parentDiv = parent.parentNode;
+                let table = parentDiv.querySelector('.table2');
+
+                let tableBody = table.querySelector('tbody');
+                let rows = table.rows;
+
+                let newRow = tableBody.insertRow(tableBody.rows.length);
+
+                let cell1 = newRow.insertCell(0);
+                cell1.innerHTML = content;
+
+                let cell2 = newRow.insertCell(1);
+                cell2.innerHTML = amount;
+
+                let cell3 = newRow.insertCell(2);
+                date_now = new Date();
+                let Month = date_now.getMonth() + 1;
+                let today =
+                    Month
+                    + '-'
+                    + date_now.getDate()
+                    + '<br>('
+                    + date_now.getHours()
+                    + ':'
+                    + date_now.getMinutes()
+                    + ')'
 
 
-            let challengeDiv = findAncestor(clickedButton, 'challenge_');
-            let id=challengeDiv.id;
-            let challengeData = JSON.parse(localStorage.getItem(`challenge_${id}`));
-            
-            challengeData.table.push(newArray);
-            challengeData.value=newValue;
-            localStorage.setItem(`challenge_${id}`, JSON.stringify(challengeData));
 
 
-            
+                cell3.innerHTML = today;
 
+                let cell4 = newRow.insertCell(3);
+                cell4.innerHTML = `<button id="deleteTd" onclick="removeTr(this)"><i class="fa-solid fa-xmark"></i></button>`
+
+
+                // 입력 창 초기화
+                amountLabel.value = ""
+                contentLabel.nextElementSibling.value = ""
+
+                //합 구하기
+
+                let numCols = rows[0].cells.length;
+                let colSums = new Array(numCols).fill(0);
+
+                for (let j = 1; j < rows.length; j++) {
+                    colSums[1] += parseInt(rows[j].cells[1].textContent) || 0;
+                }
+
+                let itemDiv = parent.parentNode;
+                let progress = itemDiv.querySelector('progress');
+                let newValue = colSums[1];
+                progress.value = newValue;
+
+                //label값 변경하기
+                let labelProgress = itemDiv.querySelector('span');
+                labelProgress.textContent = `${newValue}`
+
+                newArray = [cell1.innerHTML, cell2.innerHTML, cell3.innerHTML, cell4.innerHTML]
+
+
+                let challengeDiv = findAncestor(clickedButton, 'challenge_');
+                let id = challengeDiv.id;
+                let challengeData = JSON.parse(localStorage.getItem(`challenge_${id}`));
+
+                challengeData.table.push(newArray);
+                challengeData.value = newValue;
+                localStorage.setItem(`challenge_${id}`, JSON.stringify(challengeData));
+            }
+                
+            }
         }
 
-//내역 삭제
+        //내역 삭제
         function removeTr(clickedButton) {
             let td = clickedButton.parentNode;
             tr = td.parentNode;
@@ -846,7 +541,7 @@ if (table && table.length > 0) {
             subTdcontent = tr.querySelector("td:nth-child(1)");
             subContent = subTdcontent.innerHTML;
             subTdDate = tr.querySelector("td:nth-child(3)");
-            subDate=subTdDate.innerHTML;
+            subDate = subTdDate.innerHTML;
 
             tbody = tr.parentNode;
             table = tbody.parentNode;
@@ -855,28 +550,28 @@ if (table && table.length > 0) {
 
             label = itemDiv.querySelector('span');
             valueBefore = label.innerHTML
-            value = valueBefore-=sub;
+            value = valueBefore -= sub;
             label.innerHTML = value;
 
             progress = itemDiv.querySelector('progress');
-            
+
             progress.value = value;
 
             td.parentNode.remove(td);
 
 
             let challengeDiv = findAncestor(tableDiv, 'challenge_');
-            let id=challengeDiv.id;
+            let id = challengeDiv.id;
             let challengeData = JSON.parse(localStorage.getItem(`challenge_${id}`));
 
             for (let i = 0; i < challengeData.table.length; i++) {
                 if (challengeData.table[i][0] == subContent && challengeData.table[i][1] == sub && challengeData.table[i][2] == subDate) {
-            // 내역 삭제
-            challengeData.table.splice(i, 1);
-            break;
-        }
-    }
-            challengeData.value=value;
+                    // 내역 삭제
+                    challengeData.table.splice(i, 1);
+                    break;
+                }
+            }
+            challengeData.value = value;
             localStorage.setItem(`challenge_${id}`, JSON.stringify(challengeData));
 
 
