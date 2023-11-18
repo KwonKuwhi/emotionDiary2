@@ -105,6 +105,11 @@ body {
     margin-top: 60px;
     font-weight: 600;
 }
+.content-wrapper .survey-result{
+    text-align: center;
+    margin-top:30px;
+    margin-bottom: 5px;
+}
 
 
 .question {
@@ -272,6 +277,7 @@ ul {
 
 #firstAnswer{
     margin-top:40px;
+    text-align: center;
 }
 
 .survey-result{
@@ -279,10 +285,10 @@ ul {
     margin: 0 auto;
 }
 .yes-no-idx{
-    width:360px; 
-    display: flex; 
-    justify-content: flex-start; 
-    margin:10px 0;
+    width: 355px;
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px 0;
 }
 .pie-wrapper{
     display: flex;
@@ -308,7 +314,20 @@ ul {
 
 .month-price{
     /* margin-top:30px;    */
-    margin-top: 130px;
+    width: 180px;
+    height: 170px;
+    margin-left: 3vw;
+    margin-top: 2vw;
+    font-size: 14px;
+}
+.research-price{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.research-content{
+    margin-top: 20px;
+    font-size: 13px;
 }
 /* .transition{
     transition: all 0.3s ease; 
@@ -328,6 +347,14 @@ ul {
     font-size: 20px;
     transform: translate(-50%, -50%);
   }
+
+.idx-box-yes{
+    background-color:#ff6464;
+}
+
+.idx-box-no{
+    background-color: #ccc;
+}
 
 .graphWrap {
     position: relative;
@@ -547,7 +574,7 @@ ul {
 
 .popup{
     height:80vh;
-    width:90%;
+    width:80%;
 }
 .q-box{
     width:43%;
@@ -565,21 +592,34 @@ input.q-box.q-box2 {
 }
 .result-btn{
     width:92%;
+    margin-top: 35px;
 }
 .pie-wrapper{
     flex-wrap: wrap;
     justify-content: center;
 }
 .month-price{
-    margin-top: 10px;
+    /* margin-top: 10px;
     margin-left: 10%;
-    margin-right: 10%;
+    margin-right: 10%; */
+    margin: 10px 10%;
+    height:30px;
     
 }
 .survey-result {
+    text-align: center;
     width: 94%;
 }
-
+.research-price{
+    text-align: center;
+}
+.research-content{
+    width: 55vw;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: 30px;
+}
 .yes-no-idx{
     width:100%; 
     display: flex; 
@@ -623,6 +663,22 @@ input.q-box.q-box2 {
 }
 .idx-wrapper{
     width:80%;
+}
+.pie-wrapper {
+    margin-top: 10px;
+}
+.pie-chart{
+    width:150px;
+    height:150px;
+}
+span.center{
+    width:85px;
+    height:85px;
+    line-height: 85px;
+}
+.content-wrapper .survey-result{
+    margin-top:15px;
+    text-align: center;
 }
 
 }
