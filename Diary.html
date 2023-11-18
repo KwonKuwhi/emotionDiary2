@@ -9,19 +9,16 @@
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://kit.fontawesome.com/9c0c1d590d.js"
-      crossorigin="anonymous"
-    ></script>
     <link
       href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css"
       rel="stylesheet"
     />
-    <link href="./index.css" rel="stylesheet" />
+
     <link rel="icon" href="./img/face.png" type="image/x-icon" />
     <script src="./index.js"></script>
 
-    <link rel="stylesheet" href="./diary_CSS.css" />
+    <link href="./index.css" rel="stylesheet" />
+    <link href="./Diary.css" rel="stylesheet" />
 
     <style></style>
   </head>
@@ -29,10 +26,10 @@
   <body>
     <div class="header">
       <img src="./img/logo.png" onclick="location.href='./main.html'" />
-      <div class="loginBtn" onclick="location.href='./login.html'">
-        <i class="fa-solid fa-user"></i> 로그인
-      </div>
-      <i class="fa-solid fa-bars"></i>
+      <div class="loginBtn" onclick="location.href='./login.html'">로그인</div>
+      <!-- <i class="fa-solid fa-bars"></i> -->
+      <img src="./img/menu.svg" class="menuBtn" />
+
       <div class="user-profile">
         <div class="user-name">환영합니다<br /></div>
         <img id="profile" src="./img/face.png" />
@@ -40,7 +37,6 @@
       <div class="user-name-span">
         <div class="logoutBtn" onclick="logout();">로그아웃</div>
       </div>
-      <!-- <div class="logoutBtn" onclick="logout();"><i class="fa-solid fa-arrow-right-from-bracket"></i></i> 로그아웃</div> -->
     </div>
 
     <div class="cha-container">
@@ -60,16 +56,18 @@
             </div> -->
         <ul class="nav-menu">
           <a href="./index.html">
-            <li class="nav-li">
-              <i class="fa-solid fa-calendar"></i>감정소비 가계부
+            <li class="navi-li">
+              <img src="./img/fedger.svg" class="li-img" />감정소비 가계부
             </li>
           </a>
           <a href="./index.html">
-            <li class="nav-li"><i class="fa-solid fa-book"></i>다이어리</li>
+            <li class="navi-li">
+              <img src="./img/diary.svg" class="li-img" />다이어리
+            </li>
           </a>
           <a href="./index.html">
-            <li class="nav-li">
-              <i class="fa-solid fa-square-check"></i>챌린지
+            <li class="navi-li">
+              <img src="./img/challenge.svg" class="li-img" />챌린지
             </li>
           </a>
         </ul>
@@ -82,18 +80,14 @@
           <img class="t-angry" src="./img/angry.png" />
         </div>
       </div>
+
       <div class="cha-content">
         <!-- 다이어리 전체   -->
 
         <div id="main">
           <div class="diaryHeader">
             <div class="diarytTitle">다이어리</div>
-            <div class="diaryExplain">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo enim
-              molestiae qui fugiat nemo dignissimos placeat reiciendis. Numquam
-              accusantium, illum ipsum totam voluptas, et cupiditate veniam sit
-              distinctio ipsa obcaecati?
-            </div>
+            <div class="diaryExplain">그날 그날의 감정을 기록하는 다이어리</div>
           </div>
 
           <!-- 날짜 변경 버튼 -->
