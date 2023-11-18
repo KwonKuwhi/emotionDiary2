@@ -275,3 +275,54 @@ th {
     top: 0;
     background-color: #FADEDA;
 }
+@media all and (min-width:768px) and (max-width:1023px) {
+    #container>div {
+        width: calc(50% - 15.1px);
+    }
+}
+
+@media all and (max-width:767px) {
+    #container>div {
+        width: calc(100% - 15.1px);
+    }
+
+    section {
+        width: 95%;
+        text-align: center;
+    }
+
+    .challenge-current {
+        width: 95%;
+    }
+
+    #tabel {
+        font-size: 10px;
+    }
+
+    #addbutton tr {
+        display: block;
+        box-sizing: border-box;
+    }
+
+    #addbutton td {
+        display: block;
+        box-sizing: border-box;
+    }
+
+    .addbutton td {
+        padding: 10px 0;
+        /* border: 1px solid black; */
+    }
+
+    .tdContent {
+        width: 100%;
+    }
+
+    .tdInput {
+        width: 100%;
+        text-align: center;
+    }
+    .addbutton{
+        justify-content: center;
+    }
+}
