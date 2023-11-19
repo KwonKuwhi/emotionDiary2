@@ -126,7 +126,7 @@
     let answer2 = [];
 
     // 다음 버튼을 누르면 버튼 css가 초기화 되도록(disabled 처리)
-    $('.submit-btn').on('click', function () {
+    $('.submit-btn').on('click touchstart', function () {
         btn.prop('disabled');
         btn.removeClass('next');
         btn.css('background-color', 'rgb(204, 204, 204)')
@@ -135,7 +135,7 @@
     })
 
     // .q-box 클릭 이벤트
-    $('.q-box').on('focus', function () {
+    $('.q-box').on('focus touchstart', function () {
         btn.removeAttr('disabled');
         btn.addClass('next');
         btn.css('background-color', '#FADEDA')
@@ -143,7 +143,7 @@
     })
 
 
-    $(document).on('click', function (event) {
+    $(document).on('click touchstart', function (event) {
         const clickedElement = $(event.target);
 
         console.log(clickedElement)
@@ -159,11 +159,11 @@
 
 
     // .q-box을 마지막으로 클릭한 값을 받아오기 위한 클릭이벤트
-    $('.question-num1').on('click', function () {
+    $('.question-num1').on('click touchstart', function () {
         answer.push('yes');
         console.log(answer);
     })
-    $('.question-num2').on('click', function () {
+    $('.question-num2').on('click touchstart', function () {
         answer.push('no');
         console.log(answer);
     })
