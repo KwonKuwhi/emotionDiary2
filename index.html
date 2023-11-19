@@ -127,14 +127,13 @@
 
     // 다음 버튼을 누르면 버튼 css가 초기화 되도록(disabled 처리)
     $('.submit-btn').on('click', function () {
-        btn.attr('disabled');
+        btn.prop('disabled');
         btn.removeClass('next');
         btn.css('background-color', 'rgb(204, 204, 204)')
         $('.line1').css('background-color', '#c1c1c1');
         $('.line2').css('background-color', '#FADEDA');
-
-
     })
+
     // .q-box 클릭 이벤트
     $('.q-box').on('focus', function () {
         btn.removeAttr('disabled');
@@ -151,7 +150,7 @@
         // 만약 클릭된 요소가 .q-box가 아니고, submit-btn이 아니면
         if (!clickedElement.hasClass('q-box') && !clickedElement.hasClass('submit-btn')) {
             // submit-btn을 disabled 처리하고 스타일 초기화
-            btn.attr('disabled', 'disabled');
+            btn.prop('disabled', 'disabled');
             btn.removeClass('next');
             btn.css('background-color', 'rgb(204, 204, 204)')
             console.log($('.submit-btn').prop('disabled'));
