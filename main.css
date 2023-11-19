@@ -44,7 +44,6 @@
 /* 캘린더 전체 박스 */
 #calendar-container {
   /* border: 2px solid black; */
-
   width: 70%;
   margin-right: 1%;
   height: 65%;
@@ -212,13 +211,10 @@ td.has-content {
 
 /* 날짜 입력창 */
 #containerbox1 {
+  margin: 14% 3% 0 3%;
   display: flex;
-  width: 100%;
-
-  margin-top: 14%;
-  margin-left: 2%;
-
-  /* border: 2px solid black; */
+  width: 94%;
+  border: 2px solid black;
 }
 
 /* 날짜 입력값 */
@@ -230,7 +226,7 @@ td.has-content {
   border: none;
   outline: none;
 
-  width: 50%;
+  width: 100%;
 
   box-sizing: border-box;
   /* display: inline-block; */
@@ -239,16 +235,22 @@ td.has-content {
 /* 입력값 제목 모음 */
 .contianerMainText {
   /* background-color: pink; */
-  width: 90px;
+  width: 60px;
 
-  margin-left: 2%;
-  font-size: 18px;
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.contianerMainText.divWide{
+  width: 90px;
+  margin-left: 5px;
+  font-size: 16px;
   font-weight: bold;
 }
 
 /* 중간 줄 */
 .horizontal-line {
-  width: 98%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   height: 1px;
@@ -258,16 +260,15 @@ td.has-content {
 
 /* 감정 버튼 전체 */
 .btnbox-container {
-  margin-top: 7%;
-  margin-bottom: 7%;
+  margin: 5% 3%;
   /* display: flex; */
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  width: 100%;
+  width: 94%;
 
   display: flex;
-  /* border: 1px solid black; */
+  border: 1px solid black;
 }
 
 /* 감정 모음 */
@@ -276,19 +277,24 @@ td.has-content {
   display: flex;
   justify-content: space-evenly;
   margin-top: 1%;
+  align-items: flex-end;
 
   /* border: 1px solid black; */
 }
 
 /* 버튼크기- 박스 크기 - 이미지 크기 */
 
+.btnbox.btn{
+  padding:0;
+}
+
 .btnbox button .img-container {
-  width: 5%;
-  height: 5%;
+  /* width: 5%;
+  height: 5%; */
   border: none;
 }
 
-.btnbox button {
+/* .btnbox button {
   padding: 10px;
   cursor: pointer;
   border: 2px solid #3498db;
@@ -304,7 +310,7 @@ td.has-content {
   object-fit: cover;
   border: none;
   background-color: transparent;
-}
+} */
 
 .btnbox button.active {
   border-width: 3px;
@@ -316,19 +322,27 @@ td.has-content {
 }
 
 /* 감정이미지 크기 조절 */
-.emotionImg {
-  width: 55%;
+img.emotionImg {
+  width: 2vw;
 }
 
-.emotionImg:hover {
-  width: 65%;
+#frustrating .img-container .emotionImg{
+  width:3vw;
 }
+
+/* .emotionImg:hover {
+  width: 100%;
+} */
+/* .img-container .emotionImg:hover{
+  width:3vw;
+} */
 
 /* 지출금액 입력 전체*/
 #containerbox3 {
   display: flex;
-  width: 100%;
-  margin-left: 2%;
+  width: 94%;
+  margin : 0 3%;
+  border: 1px solid black;
 }
 
 /* 지출 금액 입력 창 */
@@ -352,22 +366,20 @@ td.has-content {
   height: 10%;
   display: flex;
   justify-content: flex-end;
-  margin-top: 11%;
+  margin-top: 10px;
   padding-right: 2%;
 }
 
 #input-button {
-  width: 25%;
-  height: 100%;
-
-  padding: 10px;
-
+  width: 55px;
+  font-size: 12px;
+  height: 25px;
+  padding: 1px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
   border-radius: 5px;
   line-height: 7%;
-  font-size: 100%;
 }
 
 #input-button:hover {
@@ -375,18 +387,18 @@ td.has-content {
 }
 
 #reset-button {
-  /* left: 350px; */
-  margin-left: 10px;
-  width: 25%;
-  height: 100%;
-  padding: 10px;
+  width: 55px;
+  font-size: 12px;
+  height: 25px;
+  padding: 1px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
   border-radius: 5px;
   line-height: 7%;
+  margin-left: 5px;
+  margin-right: 5px;
 
-  font-size: 100%;
 }
 
 #reset-button:hover {
@@ -539,11 +551,17 @@ label {
 
 @media all and (min-width: 768px) and (max-width: 1023px) {
   #reset-button {
-    width: 30%;
+    width: 55px;
+    font-size: 12px;
+    height: 25px;
+    padding: 1px;
   }
 
   #input-button {
-    width: 30%;
+    width: 55px;
+    font-size: 12px;
+    height: 25px;
+    padding: 1px;
   }
 
   .progress-description {
@@ -557,6 +575,11 @@ label {
   .emotionImg:hover {
     width: 100%;
   }
+  /* .tmo2 {
+    font-size: 16px;
+      width: 100%;
+      margin-bottom: 10vw;
+  } */
 }
 
 @media all and (max-width: 767px) {
@@ -574,8 +597,10 @@ label {
   }
 
   #calendar-container {
-    width: 80%;
+    width: 100%;
     margin-top: 5%;
+    margin-left: 5%;
+    box-shadow: none;
   }
 
   #container-box {
@@ -602,4 +627,9 @@ label {
   #input-button {
     font-size: 80%;
   } */
+  .tmo2 {
+    font-size: 16px;
+      width: 100%;
+      margin-bottom: 10vw;
+  }
 }
