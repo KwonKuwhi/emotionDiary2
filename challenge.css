@@ -37,6 +37,10 @@ section {
     padding-left: 10px;
     padding-bottom: 20px;
 }
+.second.noChallenge{
+    line-height: 17px;
+    padding:0;
+}
 
 button {
     background-color: #dadada;
@@ -175,7 +179,7 @@ select {
     box-sizing: border-box;
     padding: 2%;
     line-height: 28px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     box-shadow: 2px 2px 5px 0px rgba(128, 128, 128, 0.37);
     height: 400px;
     color: #333;

@@ -46,23 +46,23 @@
   /* border: 2px solid black; */
   width: 70%;
   margin-right: 1%;
-  height: 65%;
+  /* height: 65%; */
+  height:40vw;
   /* width: 45%; */
   /* height: 60%; */
 
   /* overflow: hidden; */
-  border-radius: 10px;
+  /* border-radius: 10px; */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 /* 캘린더 제목, 버튼 */
 .calendar-header {
+  margin: 5%;
   display: flex;
-
   justify-content: center;
   text-align: center;
-  margin-top: 5%;
-
+  /* margin-top: 5%; */
   color: #333;
   font-size: 20px;
   height: 7%;
@@ -96,7 +96,7 @@
 table {
   border-collapse: collapse;
   width: 100%;
-  height: 70%;
+  height: 30vw;
   background-color: #fff;
 
   table-layout: fixed;
@@ -146,17 +146,18 @@ td {
 }
 
 th {
-  background-color: rgb(251, 210, 217);
+  background-color: #f0f0f0;
   line-height: 50px;
-  color: #fff;
+  /* color: #fff; */
 
   font-size: 14px;
   height: 50px;
 }
 
 td:hover {
-  background-color: rgb(251, 210, 217);
-  color: #fff;
+  /* background-color: rgb(251, 210, 217);
+  color: #fff; */
+  border:2px solid #f7bac2;
 }
 
 td.selected {
@@ -167,6 +168,20 @@ td.selected {
 td.has-content {
   height: auto;
   /* 자동으로 크기 조절 */
+}
+
+table thead tr th.saturday{
+  color:blue;
+}
+table thead tr th.sunday{
+  color:red;
+  
+}
+#calendar-body tr td:first-child{
+  color:red;
+}
+#calendar-body tr td:last-child{
+  color:blue;
 }
 
 /* 가계부, 감정입력 전체 */
@@ -196,11 +211,11 @@ td.has-content {
 /* 날짜, 감정, 금액 입력창 */
 #containerBoxMain1 {
   width: 100%;
-  height: 55%;
-
+  /* height: 55%; */
+  height:22vw;
   padding: 0;
 
-  border-radius: 10px;
+  /* border-radius: 10px; */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
   display: flex;
@@ -211,11 +226,19 @@ td.has-content {
 
 /* 날짜 입력창 */
 #containerbox1 {
-  margin: 14% 3% 0 3%;
+  /* margin: 14% 3% 0 3%;
   display: flex;
   width: 94%;
-  border: 2px solid black;
+  border: 2px solid black; */
+  margin: 1.5vw 5% 0px 5%;
+    display: flex;
+    width: 90%;
+    /* border: 2px solid black; */
+    height: 3vw;
+    line-height: 3vw;
+    border-bottom: 1px solid #ccc;
 }
+
 
 /* 날짜 입력값 */
 #selectedDate {
@@ -234,7 +257,6 @@ td.has-content {
 
 /* 입력값 제목 모음 */
 .contianerMainText {
-  /* background-color: pink; */
   width: 60px;
 
   margin-left: 5px;
@@ -252,13 +274,13 @@ td.has-content {
   margin-left: 5px;
   font-size: 16px;
   font-weight: bold;
+  margin-top:1vw;
 }
 
 /* 중간 줄 */
 .horizontal-line {
   width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   height: 1px;
   background-color: #ccc;
   /* 상단 및 하단 마진을 조절하여 간격을 설정할 수 있습니다. */
@@ -266,15 +288,17 @@ td.has-content {
 
 /* 감정 버튼 전체 */
 .btnbox-container {
-  margin: 5% 3%;
+  margin: 5% 5%;
   /* display: flex; */
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  width: 94%;
-
+  width: 90%;
+  /* height: 3vw; */
+  line-height: 3vw;
+  border-bottom: 1px solid #ccc;
   display: flex;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 /* 감정 모음 */
@@ -282,7 +306,8 @@ td.has-content {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 1%;
+  /* margin-top: 1%; */
+  margin :1vw 0;
   align-items: flex-end;
 
   /* border: 1px solid black; */
@@ -346,9 +371,9 @@ img.emotionImg {
 /* 지출금액 입력 전체*/
 #containerbox3 {
   display: flex;
-  width: 94%;
-  margin : 0 3%;
-  border: 1px solid black;
+  width: 90%;
+  margin : 0 5%;
+  /* border: 1px solid black; */
 }
 
 /* 지출 금액 입력 창 */
@@ -365,6 +390,10 @@ img.emotionImg {
   /* border-radius: 5px; */
 }
 
+.amount-amount{
+  color:#333;
+}
+
 /* 저장, 초기화 버튼 */
 .buttonAll {
   /* background-color: pink; */
@@ -374,6 +403,11 @@ img.emotionImg {
   justify-content: flex-end;
   margin-top: 10px;
   padding-right: 2%;
+}
+#monthlyAmount{
+  margin-left: 5px;
+    font-size: 26px;
+    font-weight: bold;
 }
 
 #input-button {
@@ -403,7 +437,7 @@ img.emotionImg {
   border-radius: 5px;
   line-height: 7%;
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 5%;
 
 }
 
@@ -413,7 +447,7 @@ img.emotionImg {
 
 /* 감정 비중 박스 */
 .progressBox {
-  margin: auto;
+  /* margin: auto;
 
   margin-top: 2%;
   width: 100%;
@@ -422,16 +456,23 @@ img.emotionImg {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 
+  padding-top: 3%; */
+  margin: auto;
+  margin-top: 2%;
+  width: 100%;
+  height: 17vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* border-radius: 10px; */
   padding-top: 3%;
-
+  /* position: relative;
   /* position: relative; */
 }
 
 .contianerMainTextPro {
   width: 50%;
 
-  margin-left: 5px;
-  margin-top: 5%;
+  margin-left: 5%;
+  margin-top: 3vw;
   font-size: 16px;
   font-weight: bold;
 }
@@ -439,8 +480,8 @@ img.emotionImg {
 .progress {
   margin: auto;
   margin-top: 3%;
-  width: 95%;
-  height: 10%;
+  width: 90%;
+  height: 1vw;
 
   /* position: absolute; */
   /* bottom: 100px */
@@ -511,10 +552,11 @@ img.emotionImg {
   justify-content: space-evenly;
   align-items: center;
   height: 15%;
-  width: 100%;
+  width: 80%;
   margin: auto;
   /* font-size: 80%; */
   font-weight: bold;
+  flex-wrap: wrap;
 }
 
 a {
@@ -552,17 +594,28 @@ label {
 .totalCost {
   width: 100%;
   height: 20%;
-  margin-top: 10%;
+  margin-left:5%;
+  /* margin-top: 10%; */
 }
 
 @media all and (min-width: 768px) and (max-width: 1023px) {
+  #calendar-container{
+    height:58%;
+  }
+
+  #containerBoxMain1 {
+    height: 50%;
+  }
+
   #reset-button {
     width: 55px;
     font-size: 12px;
     height: 25px;
     padding: 1px;
   }
-
+  .progressBox{
+    height:38%;
+  }
   #input-button {
     width: 55px;
     font-size: 12px;
@@ -589,6 +642,7 @@ label {
 }
 
 @media all and (max-width: 767px) {
+  
   .cha-content {
     overflow: scroll;
   }
@@ -600,23 +654,24 @@ label {
   #mainContentBox {
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
   }
 
   #calendar-container {
     width: 100%;
-    margin-top: 5%;
-    margin-left: 5%;
+    height:70vh;
     box-shadow: none;
   }
 
   #container-box {
-    width: 80%;
+    /* width: 80%; */
+    width:78vw;
     margin-top: 5%;
   }
 
-  .buttonAll {
+  /* .buttonAll {
     margin-top: 5%;
-  }
+  } */
 
   /* .calendar-header {
         height: 5%;
@@ -636,6 +691,55 @@ label {
   .tmo2 {
     font-size: 16px;
       width: 100%;
-      margin-bottom: 10vw;
+      /* margin-bottom: 10vw; */
+  }
+  #mainHeaderText{
+    margin-bottom:0;
+  }
+
+  table{
+    margin-top:6vw;
+  }
+
+  #containerBoxMain1 {
+    /* height: 55%; */
+    height: 40vh;
+  }
+  .progressBox{
+    height:30vh;
+  }
+
+  #containerbox1 {
+    margin: 5vh 5% 0px 5%;
+    border:none;
+    height:2vh;
+  }
+
+  .btnbox-container{
+    border:none;
+    gap:0;
+    height:15vh;
+  }
+  img.emotionImg {
+    width: 6vw;
+  }
+  
+  #frustrating .img-container .emotionImg{
+    width:9vw;
+  }
+
+  /* .contianerMainText{
+    margin-top:3px;
+  } */
+
+  #containerbox3{
+    height:3vh;
+  }
+  .contianerMainTextPro{
+    margin-top: 6vh;
+  }
+
+  .contianerMainText.extraWide{
+    margin-top:3vh;
   }
 }
