@@ -251,7 +251,7 @@
                 </div>
                 <div class="progress-description" data-emotion="frustrating">
                   <div class="progress-emotion-circle frustrating"></div>
-                  좌절
+                  짜증
                 </div>
               </div>
               <!-- 기쁨, 슬픔, 화남, 지루함, 좌절 -->
@@ -442,6 +442,7 @@
     }
     // 날짜를 클릭했을 때 날짜값이 텍스트 박스에 나오게 하는 함수
 
+
     function handleDateClick(event) {
       // 클릭된 대상이 금액 입력 필드가 아닌 경우에만 처리
       if (!event.target.classList.contains('amount-amount')) {
@@ -548,7 +549,7 @@
       localStorage.setItem('currentEmotion', emotion);
     }
 
-
+    
     function resetCalendar() {
       const selectedDate = document.getElementById("selectedDate").value;
 
