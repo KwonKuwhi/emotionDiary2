@@ -247,6 +247,12 @@ td.has-content {
   font-size: 16px;
   font-weight: bold;
 }
+.contianerMainText.extraWide{
+  width: 150px;
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
 
 /* 중간 줄 */
 .horizontal-line {
@@ -383,7 +389,7 @@ img.emotionImg {
 }
 
 #input-button:hover {
-  background-color: #2980b9;
+  background-color: #FADEDA;
 }
 
 #reset-button {
@@ -402,7 +408,7 @@ img.emotionImg {
 }
 
 #reset-button:hover {
-  background-color: #c0392b;
+  background-color:  #FADEDA;
 }
 
 /* 감정 비중 박스 */
@@ -424,9 +430,9 @@ img.emotionImg {
 .contianerMainTextPro {
   width: 50%;
 
-  margin-left: 2%;
+  margin-left: 5px;
   margin-top: 5%;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -498,7 +504,7 @@ img.emotionImg {
 }
 
 .progress-description {
-  font-size: 80%;
+  font-size: 10px;
 }
 .progress-description-container {
   display: flex;

@@ -27,6 +27,7 @@
     ::before {
       box-sizing: unset;
     }
+
   </style>
 </head>
 
@@ -195,8 +196,8 @@
 
             <div class="progressBox">
               <div class="totalCost">
-                <div class="contianerMainText divWide">총 소비 금액</div>
-                <div>얼마</div>
+                <div class="contianerMainText extraWide">이번 달 총 소비 금액</div>
+                <div><span id="monthlyAmount">0원</span></div>
               </div>
               <div class="horizontal-line"></div>
 
@@ -253,250 +254,302 @@
     </div>
   </div>
 
+</body>
+
+<script>
+  // 전역변수
+  let date = new Date();
+  let currentYear = new Date().getFullYear();
+  let currentMonth = new Date().getMonth() + 1;
+  let target;
+  let selectedDateCell
+  let monthlyExpense = 0;
 
 
+  window.onload = function () {
 
+    updateCalendar();
 
+    // 추가: 저장된 monthly 값을 표시
+    const storedMonthly = localStorage.getItem('monthly') || '0';
+    document.getElementById('monthlyAmount').innerText = storedMonthly + '원';
 
+    // 추가: 저장된 데이터를 불러와서 표시
+    const storedData = JSON.parse(localStorage.getItem('storedData')) || {};
+    Object.keys(storedData).forEach(date => {
+      try {
+        const dateParts = date.split(" ");
+        const year = parseInt(dateParts[0].replace("년", ""));
+        const month = parseInt(dateParts[1].replace("월", ""));
+        const day = parseInt(dateParts[2].replace("일", ""));
 
-
-  <script>
-    // 전역변수
-    let date = new Date();
-    let currentYear = new Date().getFullYear();
-    let currentMonth = new Date().getMonth() + 1;
-    let target;
-    let selectedDateCell
-    let monthlyExpense = 0;
-
-
-    window.onload = function () {
-      // 기존 코드
-      updateCalendar();
-
-      // 추가: 저장된 데이터를 불러와서 표시
-      const storedData = JSON.parse(localStorage.getItem('storedData')) || {};
-      Object.keys(storedData).forEach(date => {
-        try {
-          const dateParts = date.split(" ");
-          const year = parseInt(dateParts[0].replace("년", ""));
-          const month = parseInt(dateParts[1].replace("월", ""));
-          const day = parseInt(dateParts[2].replace("일", ""));
-
-          // 해당 날짜의 셀을 찾아서 표시
-          const cells = document.querySelectorAll("#calendar-body td");
-          cells.forEach(cell => {
-            if (
-              cell.textContent !== "" &&
-              parseInt(cell.textContent) === day &&
-              currentYear === year &&
-              currentMonth === month
-            ) {
-              // 수정: 저장된 데이터를 불러와서 표시하는 함수 사용
-              showStoredDataOnCell(cell, storedData[date]);
-            }
-          });
-        } catch (error) {
-          console.error("Error parsing date:", date, error);
-        }
-      });
-
-      // 수정: 저장된 데이터를 기반으로 프로그래스 바 업데이트
-      updateProgressBarFromStoredData(storedData);
-    };
-
-    // 수정: 저장된 데이터를 불러와서 표시하는 함수
-    function showStoredDataOnCell(cell, storedData) {
-      const emotion = storedData.emotion;
-      const amounts = storedData.amounts;
-
-      // 감정 동그라미 추가 (이미 추가된 경우에는 무시)
-      if (!$(cell).children('.emotion-circle').length) {
-        const circle = document.createElement('div');
-        circle.classList.add('emotion-circle', emotion);
-        cell.appendChild(circle);
-      }
-
-      // 금액 추가 (이미 추가된 경우에는 무시)
-      if (!$(cell).children('.amount-amount').length) {
-        for (const amount of amounts) {
-          const amountParagraph = document.createElement('p');
-          amountParagraph.classList.add('amount-amount');
-          amountParagraph.innerHTML = `<br>${amount}원`;
-          cell.appendChild(amountParagraph);
-        }
-      }
-    }
-
-
-    // 수정: 저장된 데이터를 기반으로 프로그래스 바 업데이트
-    function updateProgressBarFromStoredData(storedData) {
-      Object.values(storedData).forEach(data => {
-        const emotion = data.emotion;
-        const amounts = data.amounts;
-
-        // 프로그래스 바 업데이트
-        updateProgressBar(emotion, amounts.reduce((acc, curr) => acc + parseInt(curr), 0));
-      });
-    }
-
-    // 캘린더 생성 함수 1
-    function createCalendar(year, month) {
-      const container = document.getElementById("calendar-body");
-      container.innerHTML = "";
-
-      const firstDay = new Date(year, month - 1, 1).getDay();
-      const lastDay = new Date(year, month, 0).getDate();
-      const totalWeeks = Math.ceil((firstDay + lastDay) / 7);
-
-      let dayCount = 1;
-      for (let i = 0; i < totalWeeks; i++) {
-        const row = container.insertRow();
-
-        for (let j = 0; j < 7; j++) {
-          const cell = row.insertCell();
-
-          if (i === 0 && j < firstDay) {
-            // 빈 셀: 첫째 날 이전의 빈 셀
-          } else if (dayCount > lastDay) {
-            // 빈 셀: 마지막 날 이후의 빈 셀
-          } else {
-            cell.textContent = dayCount;
-            cell.addEventListener("click", handleDateClick);
-            dayCount++;
+        // 해당 날짜의 셀을 찾아서 표시
+        const cells = document.querySelectorAll("#calendar-body td");
+        cells.forEach(cell => {
+          if (
+            cell.textContent !== "" &&
+            parseInt(cell.textContent) === day &&
+            currentYear === year &&
+            currentMonth === month
+          ) {
+            // 수정: 저장된 데이터를 불러와서 표시하는 함수 사용
+            showStoredDataOnCell(cell, storedData[date]);
           }
-        }
+        });
+      } catch (error) {
+        console.error("Error parsing date:", date, error);
       }
-    }
-
-    // 캘린더 생성 함수2
-    function updateCalendarHeader() {
-      document.getElementById("currentMonthYear").textContent = `${currentYear}년 ${currentMonth}월`;
-    }
-
-    function prevMonth() {
-      currentMonth--;
-      if (currentMonth === 0) {
-        currentMonth = 12;
-        currentYear--;
-      }
-      updateCalendar();
-    }
-
-    function nextMonth() {
-      currentMonth++;
-      if (currentMonth === 13) {
-        currentMonth = 1;
-        currentYear++;
-      }
-      updateCalendar();
-    }
-
-    function updateCalendar() {
-      updateCalendarHeader();
-      createCalendar(currentYear, currentMonth);
-    }
-    // 날짜를 클릭했을 때 날짜값이 텍스트 박스에 나오게 하는 함수
-
-    function handleDateClick(event) {
-      // 클릭된 대상이 금액 입력 필드가 아닌 경우에만 처리
-      if (!event.target.classList.contains('amount-amount')) {
-        const selectedDate = parseInt(event.target.textContent);
-        target = event.target;
-
-        // isNaN 함수를 사용하여 숫자가 아닌 경우에 대한 예외 처리
-        if (!isNaN(selectedDate)) {
-          document.getElementById("selectedDate").value = `${currentYear}년 ${currentMonth}월 ${selectedDate}일 `;
-          // document.querySelector('amount-amount').value = 
-
-          selectedDateCell = target;
-        } else {
-          alert('유효한 날짜를 선택하세요.');
-        }
-      } else {
-        // 만약 금액 입력 상자를 클릭했다면 해당 날짜 셀을 클릭한 것으로 처리
-        const dateCell = event.target.closest('td');
-        if (dateCell) {
-          dateCell.click();
-        }
-      }
-
-
-      // 금액 초기화
-      $('.amount-input').val("");
-    }
-
-    // 나머지 코드는 동일하게 유지
-
-
-    $('.btnbox').on('click', function () {
-      $('.btnbox').removeClass('active');
-      $(this).addClass('active');
-      showEmotionCircle(); // 감정 버튼을 클릭할 때마다 동그라미 
-
-
-
     });
 
-    // 감정 동그라미 생성 함수
-    function showEmotionCircle() {
-      const emotion = $('.btnbox.active').val();
+    updateMonthlyAmount();
+
+    // 수정: 저장된 데이터를 기반으로 프로그래스 바 업데이트
+    updateProgressBarFromStoredData(storedData);
+  };
+
+  // storage 이벤트 핸들러
+  window.addEventListener('storage', function (event) {
+    if (event.key === 'monthly') {
+      console.log("Storage event detected. Monthly value in storage:", localStorage.getItem('monthly'));
+      updateMonthlyAmount();
+    }
+  });
+
+  // 새로운 함수: monthly 값 갱신 시에 호출되는 함수
+  function updateMonthlyAmount() {
+    const storedMonthly = localStorage.getItem('monthly') || '0';
+    document.getElementById('monthlyAmount').innerText = storedMonthly + '원';
+  }
+  // 나머지 코드는 동일하게 유지
+
+  // 새로운 함수: monthly 값을 로컬 스토리지에 저장하는 함수
+  function saveMonthlyToLocalStorage(monthlyExpense) {
+    localStorage.setItem('monthly', monthlyExpense);
+    updateMonthlyAmount()
+  }
+
+  // 새로운 함수: 금액을 초기화할 때 호출되는 함수
+  function resetMonthlyAmount() {
+    const storedMonthly = localStorage.getItem('monthly');
+
+    if (storedMonthly !== null) {
+      monthlyExpense = parseInt(storedMonthly);
+      updateMonthlyFromResetAmounts();
+      localStorage.setItem('monthly', monthlyExpense); // localStorage에 업데이트된 monthly 값을 저장
+      updateMonthlyAmount(); // monthlyAmount 즉시 업데이트
+    }
+  }
+
+  // 금액 초기화 버튼이 클릭되었을 때 resetMonthlyAmount 호출
+  document.getElementById('reset-button').addEventListener('click', resetMonthlyAmount);
+
+
+  // 수정: 저장된 데이터를 불러와서 표시하는 함수
+  function showStoredDataOnCell(cell, storedData) {
+    const emotion = storedData.emotion;
+    const amounts = storedData.amounts;
+
+    // 감정 동그라미 추가 (이미 추가된 경우에는 무시)
+    if (!$(cell).children('.emotion-circle').length) {
       const circle = document.createElement('div');
       circle.classList.add('emotion-circle', emotion);
-      target.appendChild(circle);
+      cell.appendChild(circle);
     }
 
-    // 입력하기 버튼 
-    function handleInput() {
-      let amount = $('.amount-input').val();
-      let emotion = $('.btnbox.active').val();
-
-      if (!amount) {
-        alert('값을 입력해주세요!');
-        return;
+    // 금액 추가 (이미 추가된 경우에는 무시)
+    if (!$(cell).children('.amount-amount').length) {
+      for (const amount of amounts) {
+        const amountParagraph = document.createElement('p');
+        amountParagraph.classList.add('amount-amount');
+        amountParagraph.innerHTML = `<br>${amount}원`;
+        cell.appendChild(amountParagraph);
       }
-
-      // td에 동그라미 추가
-      const circle = document.createElement('div');
-      circle.classList.add('emotion-circle', emotion);
-      // target.appendChild(circle);
-
-      // td에 금액 추가
-      // $(target).append('<br><br>' + amount + '원');
-      $(target).append(`<p class="amount-amount"><br> ${amount}원</p>`);
+    }
+  }
 
 
-
-      monthlyExpense += Number(amount)
-      console.log(monthlyExpense)
-
-      // 로컬스토리지에 monthly가 있다면
-      if (localStorage.getItem('monthly')) {
-        localStorage.removeItem('monthly');
-        localStorage.setItem('monthly', monthlyExpense)
-      } else {
-        localStorage.setItem('monthly', monthlyExpense)
-
-      }
-
+  // 수정: 저장된 데이터를 기반으로 프로그래스 바 업데이트
+  function updateProgressBarFromStoredData(storedData) {
+    Object.values(storedData).forEach(data => {
+      const emotion = data.emotion;
+      const amounts = data.amounts;
 
       // 프로그래스 바 업데이트
-      updateProgressBar(emotion, amount);
+      updateProgressBar(emotion, amounts.reduce((acc, curr) => acc + parseInt(curr), 0));
+    });
+  }
 
-      saveDataToLocalStorage(emotion, amount);
-      // 기존 코드
-      $('.amount-input').val("");
-      $('.btnbox').removeClass('active');
+  // 캘린더 생성 함수 1
+  function createCalendar(year, month) {
+    const container = document.getElementById("calendar-body");
+    container.innerHTML = "";
+
+    const firstDay = new Date(year, month - 1, 1).getDay();
+    const lastDay = new Date(year, month, 0).getDate();
+    const totalWeeks = Math.ceil((firstDay + lastDay) / 7);
+
+    let dayCount = 1;
+    for (let i = 0; i < totalWeeks; i++) {
+      const row = container.insertRow();
+
+      for (let j = 0; j < 7; j++) {
+        const cell = row.insertCell();
+
+        if (i === 0 && j < firstDay) {
+          // 빈 셀: 첫째 날 이전의 빈 셀
+        } else if (dayCount > lastDay) {
+          // 빈 셀: 마지막 날 이후의 빈 셀
+        } else {
+          cell.textContent = dayCount;
+          cell.addEventListener("click", handleDateClick);
+          dayCount++;
+        }
+      }
+    }
+  }
+
+  // 캘린더 생성 함수2
+  function updateCalendarHeader() {
+    document.getElementById("currentMonthYear").textContent = `${currentYear}년 ${currentMonth}월`;
+  }
+
+  function prevMonth() {
+    currentMonth--;
+    if (currentMonth === 0) {
+      currentMonth = 12;
+      currentYear--;
+    }
+    updateCalendar();
+  }
+
+  function nextMonth() {
+    currentMonth++;
+    if (currentMonth === 13) {
+      currentMonth = 1;
+      currentYear++;
+    }
+    updateCalendar();
+  }
+
+  function updateCalendar() {
+    updateCalendarHeader();
+    createCalendar(currentYear, currentMonth);
+  }
+  // 날짜를 클릭했을 때 날짜값이 텍스트 박스에 나오게 하는 함수
+
+  function handleDateClick(event) {
+    // 클릭된 대상이 금액 입력 필드가 아닌 경우에만 처리
+    if (!event.target.classList.contains('amount-amount')) {
+      const selectedDate = parseInt(event.target.textContent);
+      target = event.target;
+
+      // isNaN 함수를 사용하여 숫자가 아닌 경우에 대한 예외 처리
+      if (!isNaN(selectedDate)) {
+        document.getElementById("selectedDate").value = `${currentYear}년 ${currentMonth}월 ${selectedDate}일 `;
+        selectedDateCell = target;
+      } else {
+        alert('유효한 날짜를 선택하세요.');
+      }
+    } else {
+      // 만약 금액 입력 상자를 클릭했다면 해당 날짜 셀을 클릭한 것으로 처리
+      const dateCell = event.target.closest('td');
+      if (dateCell) {
+        dateCell.click();
+      }
+
+    }
+    // 금액 초기화
+    $('.amount-input').val("");
+  }
+
+  // 나머지 코드는 동일하게 유지
+
+
+  $('.btnbox').on('click', function () {
+    $('.btnbox').removeClass('active');
+    $(this).addClass('active');
+    showEmotionCircle(); // 감정 버튼을 클릭할 때마다 동그라미 
+  });
+
+  // 감정 동그라미 생성 함수
+  function showEmotionCircle() {
+    const emotion = $('.btnbox.active').val();
+    const circle = document.createElement('div');
+    circle.classList.add('emotion-circle', emotion);
+    target.appendChild(circle);
+  }
+
+  // 입력하기 버튼 
+  function handleInput() {
+    let amount = $('.amount-input').val();
+    let emotion = $('.btnbox.active').val();
+
+
+    if (!emotion) {
+      alert('감정을 선택하세요!');
+      return;
+    }
+    if (!amount) {
+      alert('값을 입력해주세요!');
+      return;
     }
 
-    function saveEmotionToLocalStorage() {
-      const emotion = $('.btnbox.active').val();
-      localStorage.setItem('currentEmotion', emotion);
-    }
-    function resetCalendar() {
-      const selectedDate = document.getElementById("selectedDate").value;
+    // td에 동그라미 추가
+    const circle = document.createElement('div');
+    circle.classList.add('emotion-circle', emotion);
+    // target.appendChild(circle);
 
-      // 해당 날짜의 셀을 찾아서 초기화
+    // td에 금액 추가
+    $(target).append(`<p class="amount-amount"><br> ${amount}원</p>`);
+
+
+
+    monthlyExpense = monthlyExpense + Number(amount);
+    console.log(monthlyExpense)
+
+    // 로컬스토리지에 monthly가 있다면
+    if (localStorage.getItem('monthly')) {
+      localStorage.removeItem('monthly');
+      localStorage.setItem('monthly', monthlyExpense)
+    } else {
+      localStorage.setItem('monthly', monthlyExpense)
+    }
+    // 프로그래스 바 업데이트
+    updateProgressBar(emotion, amount);
+
+    saveDataToLocalStorage(emotion, amount);
+
+    $('.amount-input').val("");
+    $('.btnbox').removeClass('active');
+
+    saveMonthlyToLocalStorage(monthlyExpense);
+  }
+
+  function saveEmotionToLocalStorage() {
+    const emotion = $('.btnbox.active').val();
+    localStorage.setItem('currentEmotion', emotion);
+  }
+
+
+  function resetCalendar() {
+    const selectedDate = document.getElementById("selectedDate").value;
+
+    // 해당 날짜의 이전 데이터를 가져와서 이전 값만큼 monthly에서 뺌
+    const storedData = JSON.parse(localStorage.getItem('storedData')) || {};
+    const previousData = storedData[selectedDate];
+    if (previousData) {
+      // 이전 값만큼 monthly에서 빼기
+      const previousAmounts = previousData.amounts || [];
+      const previousTotal = previousAmounts.reduce((sum, value) => sum + parseInt(value), 0);
+      monthlyExpense -= previousTotal;
+
+      // 로컬 스토리지에서 해당 날짜의 데이터 삭제
+      deleteStoredData(selectedDate);
+
+      // 로컬스토리지에 업데이트된 monthly 저장
+      localStorage.setItem('monthly', monthlyExpense);
+
+      // 셀 초기화
       const cells = document.querySelectorAll("#calendar-body td");
       cells.forEach(cell => {
         if (
@@ -505,79 +558,82 @@
           currentYear === parseInt(selectedDate.split(" ")[0]) &&
           currentMonth === parseInt(selectedDate.split(" ")[1])
         ) {
-          // 해당 셀의 자식 요소(동그라미, 금액) 초기화
           $(cell).children('.emotion-circle, .amount-amount').remove();
-
-          // 로컬 스토리지에서 해당 날짜의 데이터 삭제
-          deleteStoredData(selectedDate);
-
-          const resetAmountText = $(cell).find('.amount-amount').text();
-          const resetAmount = parseInt(resetAmountText.replace('원', ''));
-          monthlyExpense -= resetAmount;
-          console.log(monthlyExpense);
-
-          // 로컬스토리지에 업데이트된 monthly 저장
-          localStorage.setItem('monthly', monthlyExpense);
         }
       });
-
-
-      // 기존 코드
-      $("#selectedDate").val("");
-      $(".amount-input").val("");
-      $(".btnbox").removeClass("active");
-
-      $('.progress-barHappy').css('width', '0%');
-      $('.progress-barSad').css('width', '0%');
-      $('.progress-barAngry').css('width', '0%');
-      $('.progress-barBoring').css('width', '0%');
-      $('.progress-barFrustrating').css('width', '0%');
     }
 
-    // 수정: 로컬 스토리지에서 해당 날짜의 데이터 삭제하는 함수
-    function deleteStoredData(selectedDate) {
-      const storedData = JSON.parse(localStorage.getItem('storedData')) || {};
-      delete storedData[selectedDate];
-      localStorage.setItem('storedData', JSON.stringify(storedData));
+    // 기존 코드
+    $("#selectedDate").val("");
+    $(".amount-input").val("");
+    $(".btnbox").removeClass("active");
+
+    $('.progress-barHappy').css('width', '0%');
+    $('.progress-barSad').css('width', '0%');
+    $('.progress-barAngry').css('width', '0%');
+    $('.progress-barBoring').css('width', '0%');
+    $('.progress-barFrustrating').css('width', '0%');
+  }
+
+  // 나머지 코드는 동일하게 유지
+
+  // 새로운 함수: 배열에 저장된 값들을 이용하여 누적 monthly 업데이트
+  let resetAmounts = []; // resetAmounts를 먼저 정의
+
+  function updateMonthlyFromResetAmounts() {
+    monthlyExpense -= resetAmounts.reduce((sum, value) => sum + value, 0);
+    console.log("Monthly Expense:", monthlyExpense);
+
+    // 로컬스토리지에 업데이트된 monthly 저장
+    localStorage.setItem('monthly', monthlyExpense);
+
+    // 배열 초기화
+    resetAmounts = [];
+  }
+
+
+  // 수정: 로컬 스토리지에서 해당 날짜의 데이터 삭제하는 함수
+  function deleteStoredData(selectedDate) {
+    const storedData = JSON.parse(localStorage.getItem('storedData')) || {};
+    delete storedData[selectedDate];
+    localStorage.setItem('storedData', JSON.stringify(storedData));
+  }
+
+
+
+
+  function updateProgressBar(emotion, amount) {
+    // 프로그래스 바 업데이트
+    const progressBar = $('.progress-bar' + emotion.charAt(0).toUpperCase() + emotion.slice(1));
+    let currentWidth = parseInt(progressBar.css('width'));
+    currentWidth += parseInt(amount); // 간단한 업데이트 로직, 적절히 수정 가능
+    progressBar.css('width', currentWidth + '%');
+  }
+
+
+
+
+
+
+
+  function saveDataToLocalStorage(emotion, amount) {
+    const selectedDate = $('#selectedDate').val();
+
+    // 기존 로컬 스토리지에서 정보를 가져옴
+    let storedData = JSON.parse(localStorage.getItem('storedData')) || {};
+
+    // 현재 선택된 날짜를 key로 사용하여 정보 저장
+    if (!storedData[selectedDate]) {
+      storedData[selectedDate] = { emotion: emotion, amounts: [amount] };
+    } else {
+      storedData[selectedDate].emotion = emotion;
+      storedData[selectedDate].amounts.push(amount);
     }
 
-
-
-
-    function updateProgressBar(emotion, amount) {
-      // 프로그래스 바 업데이트
-      const progressBar = $('.progress-bar' + emotion.charAt(0).toUpperCase() + emotion.slice(1));
-      let currentWidth = parseInt(progressBar.css('width'));
-      currentWidth += parseInt(amount); // 간단한 업데이트 로직, 적절히 수정 가능
-      progressBar.css('width', currentWidth + '%');
-    }
-
-
-
-
-
-
-
-    function saveDataToLocalStorage(emotion, amount) {
-      const selectedDate = $('#selectedDate').val();
-
-      // 기존 로컬 스토리지에서 정보를 가져옴
-      let storedData = JSON.parse(localStorage.getItem('storedData')) || {};
-
-      // 현재 선택된 날짜를 key로 사용하여 정보 저장
-      if (!storedData[selectedDate]) {
-        storedData[selectedDate] = { emotion: emotion, amounts: [amount] };
-      } else {
-        storedData[selectedDate].emotion = emotion;
-        storedData[selectedDate].amounts.push(amount);
-      }
-
-      // 저장된 정보를 다시 로컬 스토리지에 저장
-      localStorage.setItem('storedData', JSON.stringify(storedData));
-    }
-    updateCalendar();
-  </script>
-
-</body>
+    // 저장된 정보를 다시 로컬 스토리지에 저장
+    localStorage.setItem('storedData', JSON.stringify(storedData));
+  }
+  updateCalendar();
+</script>
 
 </html>
