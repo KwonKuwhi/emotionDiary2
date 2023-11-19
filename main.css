@@ -355,8 +355,11 @@ table thead tr th.sunday{
 /* 감정이미지 크기 조절 */
 img.emotionImg {
   width: 2vw;
+  transition: transform 0.1s;
 }
-
+img.emotionImg:hover{
+  transform: scale(1.5);
+}
 #frustrating .img-container .emotionImg{
   width:3vw;
 }
@@ -629,11 +632,14 @@ label {
 
   .emotionImg {
     width: 90%;
+    transition: transform 0.1s;
   }
-
-  .emotionImg:hover {
-    width: 100%;
+  img.emotionImg:hover{
+    transform: scale(1.5);
   }
+  #frustrating .img-container .emotionImg{
+    width:3vw;
+}
   /* .tmo2 {
     font-size: 16px;
       width: 100%;
@@ -721,11 +727,11 @@ label {
     height:15vh;
   }
   img.emotionImg {
-    width: 6vw;
+    width: 8vw;
   }
   
   #frustrating .img-container .emotionImg{
-    width:9vw;
+    width:12vw;
   }
 
   /* .contianerMainText{
