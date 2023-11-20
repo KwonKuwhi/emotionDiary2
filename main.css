@@ -347,6 +347,17 @@ table thead tr th.sunday{
   border-width: 3px;
 }
 
+button:focus{
+  outline: none;
+}
+
+button.buttonLeft:hover{
+  background-color: white;
+}
+button.buttonRight:hover{
+  background-color: white;
+}
+
 .btnbox button:hover {
   background-color: #3498db;
   color: #fff;
@@ -625,6 +636,7 @@ label {
     height: 25px;
     padding: 1px;
   }
+
 
   .progress-description {
     font-size: 70%;
